@@ -1,0 +1,4 @@
+{
+  "jwtPrivateKey": "djangonautic_jwtPrivateKey",
+  "db":"djangonautic_db"
+}

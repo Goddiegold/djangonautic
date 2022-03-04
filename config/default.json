@@ -1,0 +1,6 @@
+{
+  "jwtPrivateKey": "12345",
+  "db": "mongodb://localhost:27017/djangonautic",
+  "port": "1000",
+  "requiresAuth": true
+}

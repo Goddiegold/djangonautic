@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   //checks if user already exists
-  let user = await User.findOne({email: req.body.email,});
+  let user = await User.findOne({email: req.body.email});
   if (user) return res.status(400).send("User already Registered");
 
   //all values of req.body sent to DB

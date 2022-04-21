@@ -1,0 +1,348 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"fi",
+				"first"
+			],
+			[
+				"met",
+				"meta\tTag"
+			],
+			[
+				"li",
+				"link\tTag"
+			],
+			[
+				"st",
+				"stylesheet"
+			],
+			[
+				"get",
+				"getElementById"
+			],
+			[
+				"sub",
+				"submit"
+			],
+			[
+				"d",
+				"div\tTag"
+			],
+			[
+				"re",
+				"required\tAttr"
+			],
+			[
+				"in",
+				"input\tTag"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"marg",
+				"margin-left\tproperty"
+			],
+			[
+				"te",
+				"text-align\tproperty"
+			],
+			[
+				"paddin",
+				"padding-right\tproperty"
+			],
+			[
+				"mar",
+				"margin\tproperty"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Godwin/Desktop/Penciledge/21-days-challenge/21daysfrontend/src/components/payment/payment.component.jsx",
+		"/C/Users/Godwin/Desktop/Penciledge/21-days-challenge/21daysfrontend/src/components/payment/payment.styles.css",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-frontend/src/services/httpService.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-frontend/src/components/accounts/Logout.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-frontend/src/components/accounts/Signup.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-frontend/src/services/authService.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-frontend/src/components/accounts/Login.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-frontend/src/services/logService.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-frontend/src/services/userService.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-frontend/src/components/articles/ArticleCreate.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-frontend/src/App.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-frontend/src/index.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-backend/index.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-frontend/src/services/config.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-frontend/package.json",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/startup/db.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/startup/validation.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/index.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/startup/config.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/startup/cors.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/startup/logging.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/startup/routes.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/djangonautic-backend/routes/articles.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly/src/services/authService.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly/src/services/httpService.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/routes/auth.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/routes/customers.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/config/default.json",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/package.json",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/startup/prod.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/config/test.json",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly-api-node/config/custom-environment-variables.json",
+		"/C/Users/Godwin/Downloads/vidly-api-node-master/vidly-api-node-master/routes/movies.js",
+		"/C/Users/Godwin/Downloads/vidly-api-node-master/vidly-api-node-master/routes/returns.js",
+		"/C/Users/Godwin/Desktop/test.js",
+		"/C/Users/Godwin/Desktop/test.html",
+		"/C/Users/Godwin/Desktop/ADSE/practice/React_CWM/Vidly/vidly/src/components/registerForm.jsx",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/accounts/templates/accounts/login.html",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/accounts/templates/accounts/signup.html",
+		"/C/Users/Godwin/Downloads/vidly-api-node-master/vidly-api-node-master/models/movie.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/CompleteNodeCourse/vidly/index.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/CompleteNodeCourse/vidly/models/user.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/CompleteNodeCourse/vidly/routes/users.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/CompleteNodeCourse/vidly/package.json",
+		"/C/Users/Godwin/Desktop/ADSE/practice/CompleteNodeCourse/vidly/node_modules/@mapbox/node-pre-gyp/node_modules/semver/functions/compare.js",
+		"/C/Users/Godwin/Downloads/vidly-api-node-master/vidly-api-node-master/routes/rentals.js",
+		"/C/Users/Godwin/Downloads/vidly-api-node-master/vidly-api-node-master/routes/users.js",
+		"/C/Users/Godwin/Downloads/vidly-api-node-master/vidly-api-node-master/routes/genres.js",
+		"/C/Users/Godwin/Downloads/vidly-api-node-master/vidly-api-node-master/routes/customers.js",
+		"/C/Users/Godwin/Downloads/vidly-api-node-master/vidly-api-node-master/routes/auth.js",
+		"/C/Users/Godwin/Downloads/vidly-api-node-master/vidly-api-node-master/startup/routes.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/full stack web dev with node and mongo/26/react-router/package.json",
+		"/C/Users/Godwin/Desktop/ADSE/practice/djangonautic(React)/src/components/articles/ArticleCreate.js",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/articles/templates/articles/article_create.html",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/templates/base_layout.html",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/assets/slugify.js",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/templates/home-page.html",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/templates/about-page.html",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/articles/models.py",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/articles/templates/articles/article_list.html",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/assets/logo.png",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/articles/templates/articles/article_detail.html",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/assets/styles.css",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/JSON APIs with Node and Mongo/todos_api/index.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/JSON APIs with Node and Mongo/todos_api/routes/todos.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/CompleteNodeCourse/express-demo/index.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/CompleteNodeCourse/express-demo/package-lock.json",
+		"/C/Users/Godwin/Downloads/vidly-api-node-master/vidly-api-node-master/index.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/full stack web dev with node and mongo/24/image-list/src/components/SearchInput.jsx",
+		"/C/Users/Godwin/Desktop/ADSE/practice/full stack web dev with node and mongo/24/image-list/src/components/ImageList.jsx",
+		"/C/Users/Godwin/Desktop/ADSE/practice/full stack web dev with node and mongo/24/image-list/src/App.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/full stack web dev with node and mongo/21/hemisphere/src/App.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/full stack web dev with node and mongo/21/hemisphere/src/HemisphereDisplay.jsx",
+		"/C/Users/Godwin/Desktop/ADSE/practice/full stack web dev with node and mongo/20/simple-react-app/src/SingleComment.jsx",
+		"/C/Users/Godwin/Desktop/ADSE/practice/full stack web dev with node and mongo/20/simple-react-app/src/index.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/full stack web dev with node and mongo/20/simple-react-app/src/App.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/full stack web dev with node and mongo/18-19/vidly/src/App.jsx",
+		"/C/Users/Godwin/Desktop/ADSE/practice/full stack web dev with node and mongo/18-19/vidly/src/First.jsx",
+		"/C/Users/Godwin/Desktop/ADSE/practice/50 HTML projects/pure/46-Quiz-App/script.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/50 HTML projects/pure/46-Quiz-App/index.html",
+		"/C/Users/Godwin/Desktop/ADSE/practice/50 HTML projects/pure/46-Quiz-App/style.css",
+		"/C/Users/Godwin/Videos/HTML&CSS/CSS3 Animations, Transforms and Transitions Ultimate Guide/[TutsNode.com] - CSS3 Animations, Transforms and Transitions Ultimate Guide/04 Transitions/027 20 - Lab Session Rocket Animation with Multiple Transitions/20 - Lab Session Rocket Animation with Multiple Transitions/index.html",
+		"/C/Users/Godwin/Desktop/ADSE/practice/CSS3/www/transform/index.html",
+		"/C/Users/Godwin/Desktop/ADSE/practice/PyProgrammingCWM/12-build-web-app-with-django/vidly/vidly/vidly/settings.py",
+		"/C/Users/Godwin/Desktop/ADSE/practice/PyProgrammingCWM/12-build-web-app-with-django/vidly/vidly/settings.py",
+		"/C/Users/Godwin/Desktop/ADSE/practice/PyProgrammingCWM/12-build-web-app-with-django/vidly/vidly/views.py",
+		"/C/Users/Godwin/Downloads/reactnd-UdaciFitness-complete-c5c645478a1f631f7851463b80e216289b17b4d4/reactnd-UdaciFitness-complete-c5c645478a1f631f7851463b80e216289b17b4d4/components/AddEntry.js",
+		"/C/Users/Godwin/Downloads/reactnd-UdaciFitness-complete-c5c645478a1f631f7851463b80e216289b17b4d4/reactnd-UdaciFitness-complete-c5c645478a1f631f7851463b80e216289b17b4d4/package.json",
+		"/C/Users/Godwin/Downloads/reactnd-UdaciFitness-complete-c5c645478a1f631f7851463b80e216289b17b4d4/reactnd-UdaciFitness-complete-c5c645478a1f631f7851463b80e216289b17b4d4/yarn.lock",
+		"/C/Users/Godwin/Downloads/reactnd-UdaciFitness-complete-c5c645478a1f631f7851463b80e216289b17b4d4/reactnd-UdaciFitness-complete-c5c645478a1f631f7851463b80e216289b17b4d4/actions/index.js",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/djangonautic/settings.py",
+		"/C/Users/Godwin/Desktop/ADSE/practice/UdacityReactV1/folders/App.js",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/djangonautic/urls.py",
+		"/C/Users/Godwin/Downloads/djangonautic/djangonautic/articles/views.py",
+		"/C/Users/Godwin/Downloads/reactnd-project-myreads-starter-master/reactnd-project-myreads-starter-master/src/App.js",
+		"/C/Users/Godwin/Downloads/reactnd-udacimeals-complete-0e343838ef120c458f3b3b4a5de74dbc167be4d6/reactnd-udacimeals-complete-0e343838ef120c458f3b3b4a5de74dbc167be4d6/.env",
+		"/C/Users/Godwin/Downloads/reactnd-udacimeals-complete-823876c8e3b669c0338f630fa50120adb7168f6f/reactnd-udacimeals-complete-823876c8e3b669c0338f630fa50120adb7168f6f/.env",
+		"/C/Users/Godwin/Desktop/myapp/src/App.css",
+		"/C/Users/Godwin/Desktop/myapp/src/App.js",
+		"/C/Users/Godwin/Desktop/t.html",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/AJAX part2_jquery_and_axios/ron_swason_exercise.html",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/AJAX part2_jquery_and_axios/index.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/AJAX part2_jquery_and_axios/models/post.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/AJAX part2_jquery_and_axios/routes/post.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/AJAX part2_jquery_and_axios/models/index.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/AJAX part2_jquery_and_axios/axios.min.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/AJAX part2_jquery_and_axios/axios_error_handling.html",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/AJAX part2_jquery_and_axios/jquer_ajax_method.html",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/AJAX part2_jquery_and_axios/jquery_shorthand_method.html",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/AJAX part2_jquery_and_axios/jQueryRandomCatsExersice.html",
+		"/C/Users/Godwin/Desktop/CRUD/routes/todos.js",
+		"/C/Users/Godwin/Desktop/CRUD/index.js",
+		"/C/Users/Godwin/Videos/[FCO] UDACITY - React v1.0.0/index.html",
+		"/C/Users/Godwin/Downloads/angular-crash-2021-main/src/app/components/button/button.component.html",
+		"/C/Users/Godwin/Videos/Angular_AngularJS/SaleWebDesign.com-Angular-9-Masterclass-TypeScript-Material/1. Single Page Applications, Why Angular, and Getting Started/6.1 StackBlitz - The Whole Code in Action.html",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AngularCrashCourse/task-tracker/tsconfig.spec.json",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AngularCrashCourse/task-tracker/tsconfig.app.json",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AngularCrashCourse/task-tracker/tsconfig.json",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/Creating JSON APIs with Node and Mongo/todos_api/models/index.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/mongo-demo/index.js",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AngularCrashCourse/task-tracker/package.json",
+		"/C/Users/Godwin/Downloads/angular-crash-2021-main/src/app/components/tasks/tasks.component.html",
+		"/C/Users/Godwin/Downloads/angular-crash-2021-main/src/app/components/task-item/task-item.component.html",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/package-lock.json",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/Creating JSON APIs with Node and Mongo/todos_api/package.json",
+		"/C/Users/Godwin/Desktop/ADSE/practice/AdvnaceWebDevBootCamp/package.json",
+		"/C/Users/Godwin/Downloads/Responsive Website Landing Page Design -Title (Travel) -  HTML. CSS & Javascript/Responsive Website Landing Page Design -Title (Travel) -  HTML. CSS & Javascript/index.html",
+		"/C/Users/Godwin/Desktop/ImageSlider/style.css"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "auth.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 293.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

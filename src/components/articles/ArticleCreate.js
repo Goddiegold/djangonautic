@@ -1,10 +1,17 @@
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "../../services/authService";
 import { createArticle } from "../../services/userService";
+import { useNavigate } from "react-router-dom";
 
-const ArticleCreate = ({ articles }) => {
-    const user = getCurrentUser();
+
+const ArticleCreate = ({articles}) => {
+  
+  let navigate = useNavigate();
+  const user = getCurrentUser();
+  useEffect(() => {
+    if (!user) return navigate("/accounts/login");
+  },[user,navigate])
   
   const [article, setArticle] = useState({
     title: "",
@@ -12,25 +19,18 @@ const ArticleCreate = ({ articles }) => {
     thumb:""
   });
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const data = await createArticle(article);
-      // history.back();
-      articles.push(data);
-      console.log(data)
-    } catch (ex) {
-      if (ex && ex.status === 401 && user) {   
-        toast.error("Something went wrong, pls try again later");
-      }
-   }
-  // console.log(article)
+     createArticle(article).done(res => {
+       articles.push(res);
+       navigate("/");
+       toast.success("Article created successfully");
+    }).fail(err=>console.log(err));
   };
 
   const { title, body } = article;
 
-  if (!user) return location.pathname = "/accounts/login";
-  else return (
+  return (
       <div className="create-article">
         <form
           action="post"

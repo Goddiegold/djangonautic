@@ -10,7 +10,7 @@ export function register(user) {
   return http.post(apiEndPoint, user);
 }
 
-export async function createArticle(article) {
+export function createArticle(article) {
   return http.post(articleEndPoint, {  
     title: article.title,
     body: article.body,

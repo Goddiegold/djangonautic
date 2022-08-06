@@ -1,34 +1,29 @@
-import { toast } from "react-toastify";
-import log from "./logService";
-import $ from "jquery";
+import axios from "axios";
+import {toast} from "react-toastify"
 
-$.ajaxSetup({
-  beforeSend: function (xhr) {
-    xhr.fail((err) => {
-      const expectedError = err && err.status >= 400 && err.status < 500;
-      if (!expectedError) {
-        log(err);
-        toast("An unexpected error occurred");
-      }
-      return Promise.reject(err);
-    });
-  },
-});
-
-function setJwt(jwt) {
-  $.ajaxSetup({
-    beforeSend: function (xhr) {
-      xhr.setRequestHeader("x-auth-token", jwt);
-    },
-  });
+function log(err) {
+  console.log(err);
 }
 
-let http = {
-  get: $.get,
-  post: $.post,
-  put: $.ajax,
-  delete: $.ajax,
-  setJwt
-};
+axios.interceptors.response.use(null, (error) => {
+  const expectedError =
+    error.response &&
+    error.response.status >= 400 &&
+    error.response.status < 500;
 
-export default http;
+  // Unexpected errors (network down, server down, db down, bug)
+  // - Log them
+  // - Display generic and friendly error message to user
+
+  if (!expectedError) {
+    log(error);
+  }
+  return Promise.reject(error);
+});
+
+
+const instance = axios.create({
+    baseURL:"http://localhost:1000/api"
+})
+
+export default instance;

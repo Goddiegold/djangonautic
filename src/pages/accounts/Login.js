@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
-import { login, getCurrentUser } from "../../services/authService";
-
+import React, { useState,useContext, useEffect } from 'react';
+import { login } from "../../services/userService";
+import { GET_USER, UserContext, USER_LOGIN } from '../../context/UserContext';
+import { toast } from 'react-toastify';
+import {useNavigate} from "react-router-dom";
 
 const Login  = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate()
+
+  const [loading,setLoading] = useState(false);
 
   const { email, password } = user;
+  const {userDispatch,user:userInfo} = useContext(UserContext);
+
+useEffect(()=>{
+  if(userInfo&&userInfo.name) return navigate("/")
+console.log(userInfo)
+},[])
 
    const handleChange = ({currentTarget}) => {
      const logUser = { ...user };
@@ -18,18 +29,26 @@ const Login  = () => {
 
    const handleSubmit = async (e) => {
      e.preventDefault();
-     try {
-       await login(user)
-       window.location = '/';
-     } catch (ex) {
-       console.log(ex);
-     }
+     setLoading(true)
+login(user).then(res=>{
+  console.log(res)
+  toast.success(res.data)
+  userDispatch({
+    type:USER_LOGIN,
+    payload:res.headers["auth-token"]
+  })
+  setLoading(false)
+navigate("/")
+console.log(userInfo)
+}).catch(err=>{
+  console.log(err)
+  setLoading(false)
+  toast.error(err.response.data)
+})
     
   };
 
-  const loggedUser = getCurrentUser();
-  if (loggedUser) return location.pathname = '/';
-  else return (
+ return (
       <>
         <h1>Login</h1>
         <form className="site-form" method="post" onSubmit={handleSubmit}>
@@ -39,7 +58,7 @@ const Login  = () => {
             name="email"
             autoFocus
             value={email}
-            maxLength={150}
+            maxLength={100}
             minLength={5}
             required
             id="email"
@@ -55,7 +74,7 @@ const Login  = () => {
             onChange={handleChange}
           />
 
-          <input type="submit" value="Login"/>
+          <input type="submit" disabled={loading} value={loading?"Please wait...":"Login"}/>
         </form>
       </>
     );

@@ -3,7 +3,7 @@ import Article from "./Article";
 
 
 
-const ArticleList = ({articles,handleDetail}) => {
+const ArticleList = ({articles,handleDetail,data}) => {
   return (
     <>
       <h1>Articles List</h1>

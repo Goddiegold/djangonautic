@@ -1,5 +1,5 @@
-import defaultThumb from "../img/default.png"; 
-import { getCurrentUser } from "../services/authService";
+import defaultThumb from "../img/default.png";
+
 
 export const articles = [
   {
@@ -7,7 +7,7 @@ export const articles = [
     title: "Article1",
     body: "body1 body1 body1 body1 body1",
     thumb: defaultThumb,
-    author: getCurrentUser()?.author,
+    author: "author1",
     // author: "author1",
     slug: "article1",
     date: "date",

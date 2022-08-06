@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from "react";
 import { toast } from "react-toastify";
-import { getCurrentUser } from "../../services/authService";
 import { createArticle } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 
@@ -8,10 +7,9 @@ import { useNavigate } from "react-router-dom";
 const ArticleCreate = ({articles}) => {
   
   let navigate = useNavigate();
-  const user = getCurrentUser();
-  useEffect(() => {
-    if (!user) return navigate("/accounts/login");
-  },[user,navigate])
+  // useEffect(() => {
+  //   if (!user) return navigate("/accounts/login");
+  // },[user,navigate])
   
   const [article, setArticle] = useState({
     title: "",
@@ -21,11 +19,9 @@ const ArticleCreate = ({articles}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-     createArticle(article).done(res => {
-       articles.push(res);
-       navigate("/");
-       toast.success("Article created successfully");
-    }).fail(err=>console.log(err));
+     createArticle(article).then(res => {
+      console.log(res)
+    }).catch(err=>console.log(err));
   };
 
   const { title, body } = article;

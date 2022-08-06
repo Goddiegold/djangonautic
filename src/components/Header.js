@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../img/logo.png";
 import { Link } from "react-router-dom";
-import { getCurrentUser } from "../services/authService";
+import { UserContext, USER_LOGOUT } from "../context/UserContext";
+
 
 
 const Header = () => {
-  const user = getCurrentUser();
+  const {user,userDispatch} = useContext(UserContext);
+
+
+  function logout(){
+    userDispatch({
+      type:USER_LOGOUT
+    })
+  }
+
+  // const user = {author:""}
+console.log(user)
   return (
     <header className="wrapper">
       <h1>
@@ -16,10 +27,10 @@ const Header = () => {
 
       <nav>
         <ul>
-          {user ? (
+          {user && user.name?.length>1 ? (
             <>
               <li className="welcome_user">
-                Welcome {user.author}
+                Welcome {user.name}
               </li>
 
               <li>
@@ -29,7 +40,7 @@ const Header = () => {
               </li>
 
               <li>
-                <Link to="/accounts/logout">
+                <Link to="/" onClick={logout}>
                   Logout
                  </Link>
               </li>

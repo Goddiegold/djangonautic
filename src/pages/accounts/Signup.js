@@ -1,17 +1,24 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import { loginWithJwt,getCurrentUser } from "../../services/authService";
-import { register } from './../../services/userService';
-
+import React, { useContext, useState,useEffect } from "react";
+import { toast } from "react-toastify"; 
+import { UserContext, USER_LOGIN } from "../../context/UserContext";
+import { register } from '../../services/userService';
+import {useNavigate} from "react-router-dom";
 
 const Signup = (props) => {
   const [user, setUser] = useState({
-    author: "",
+    name: "",
     email: "",
     password: "",
   });
 
-  const loggedUser = getCurrentUser();
+  const navigate = useNavigate()
+  const [loading,setLoading] = useState(false);
+  const {userDispatch,user:userInfo} = useContext(UserContext);
+
+  useEffect(()=>{
+    if(userInfo&&userInfo.name) return navigate("/")
+  console.log(userInfo)
+  },[])
 
   const handleChange = ({ target }) => {
     const newUser = { ...user };
@@ -19,26 +26,29 @@ const Signup = (props) => {
     setUser(newUser);
   };
 
-  const { author, email, password } = user;
+  const { name, email, password } = user;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    register(user).then(({ token }) => {
-      console.log(token)
-      loginWithJwt(token);
-      location.pathname='/'
-    })
-    
-      .fail(err => {
-        if (err && err.status === 400) {
-          toast(err.responseText);
-      }
+    setLoading(true)
+    register(user).then(res=> {
+      console.log(res)
+      toast.success(res.data)
+      userDispatch({
+        type:USER_LOGIN,
+        payload:res.headers["auth-token"]
+      })
+setLoading(false)
+navigate("/")
+    }) .catch(err => {
        console.log(err);
+      setLoading(false);
+      toast.error(err.response.data)
     });
   };
 
-  if (loggedUser) return (location.pathname = "/");
-  else
+  
+ 
     return (
       <>
         <h1>Signup</h1>
@@ -48,12 +58,12 @@ const Signup = (props) => {
           <input
             style={{ marginTop: 10 }}
             type="text"
-            name="author"
+            name="name"
             minLength={5}
             maxLength={50}
             autoFocus
             required
-            value={author}
+            value={name}
             id="username"
             onChange={handleChange}
           />
@@ -85,7 +95,7 @@ const Signup = (props) => {
             value={password}
             onChange={handleChange}
           />
-          <input type="submit" value="Signup" id="signup"/>
+          <input type="submit" disabled={loading} value={loading?"Please wait...":"Signup"}/>
         </form>
       </>
     );

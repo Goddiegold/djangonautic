@@ -1,29 +1,34 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useContext} from "react";
 import { toast } from "react-toastify";
 import { createArticle } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 
 
 const ArticleCreate = ({articles}) => {
   
   let navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!user) return navigate("/accounts/login");
-  // },[user,navigate])
+  const {user} = useContext(UserContext)
+  useEffect(() => {
+    if (!user.userInfo.name) return navigate("/accounts/login");
+  },[user,navigate])
   
   const [article, setArticle] = useState({
     title: "",
     body: "",
-    thumb:""
+    thumb:"./assets/default.png"
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-     createArticle(article).then(res => {
+     createArticle(article,user.userInfo.token).then(res => {
       console.log(res)
-    }).catch(err=>console.log(err));
-  };
-
+      navigate("/")
+    }).catch(err=>{
+      toast.error("Pls try again later!")
+      console.log(err)
+  });
+  }
   const { title, body } = article;
 
   return (
@@ -69,13 +74,11 @@ const ArticleCreate = ({articles}) => {
             id="thumb"
             // value={thumb}
             onChange={({ target }) => {
-              const reader = new FileReader();
-              reader.onload = () => {
-                if (reader.readyState === 2) {
-                  setArticle({ ...article, thumb: reader.result });
-                }
-              };
-              reader.readAsDataURL(target.files[0]);
+              const file = target.files[0];
+              const formData = new FormData();
+              formData.append('thumb',file)
+            console.log(target.files[0])
+            setArticle({...article,thumb:file})
             }}
           />
 

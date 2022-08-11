@@ -27,10 +27,10 @@ console.log(user)
 
       <nav>
         <ul>
-          {user && user.name?.length>1 ? (
+          {user.userInfo && user.userInfo.name?.length>1 ? (
             <>
               <li className="welcome_user">
-                Welcome {user.name}
+                Welcome {user.userInfo.name}
               </li>
 
               <li>

@@ -14,8 +14,12 @@ export async function login(user) {
 }
 
 export async function createArticle(article,token) {
-  return http.post("/articles", article,{headers:{"auth-token":token}})
+  return await http.post("/articles", article,{headers:{"auth-token":token,'Content-Type':"multipart/form-data",}})
 };
+
+export async function getArticle(id){
+return await http.get(`/articles/${id}`)
+}
 
 export function getCurrentUser(token){
   try{

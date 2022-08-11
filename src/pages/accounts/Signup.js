@@ -13,7 +13,7 @@ const Signup = (props) => {
 
   const navigate = useNavigate()
   const [loading,setLoading] = useState(false);
-  const {userDispatch,user:userInfo} = useContext(UserContext);
+  const {userDispatch,user:{userInfo}} = useContext(UserContext);
 
   useEffect(()=>{
     if(userInfo&&userInfo.name) return navigate("/")

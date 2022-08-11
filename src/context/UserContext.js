@@ -9,26 +9,31 @@ const djangonauticUserToken="djangonauticUserToken";
 //user's action
 export const USER_LOGIN = "USER_LOGIN";
 export const USER_LOGOUT = "USER_LOGOUT";
-export const GET_USER = "GET_USER";
+export const GET_ALL_ARTICLES = "GET_ALL_ARTICLES";
+export const ADD_ARTICLE = "ADD_ARTICLE"
 
 function userReducer(state,action){
 switch(action.type){
     case USER_LOGIN:
         localStorage.setItem(djangonauticUserToken,action.payload)
-        return getCurrentUser(action.payload)
+        return{...state,userInfo:getCurrentUser(action.payload)}
     case USER_LOGOUT:
         localStorage.removeItem(djangonauticUserToken)
-        return {};
+        return {...state,userInfo:{}};
+    case GET_ALL_ARTICLES:
+        return {...state,articles:action.payload}
     default:
         return state;  
 }
 }
 
+
+
 function UserContextProvider({children}) {
     const [user,userDispatch] = useReducer(userReducer,{},()=>{
 const token = localStorage.getItem(djangonauticUserToken);
-if(token) return getCurrentUser(token)
-else return {}
+if(token) return {userInfo:getCurrentUser(token),articles:[]}
+else return {userInfo:{},articles:[]}
     })  
 
 // useEffect(()=>{

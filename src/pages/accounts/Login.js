@@ -14,7 +14,7 @@ const Login  = () => {
   const [loading,setLoading] = useState(false);
 
   const { email, password } = user;
-  const {userDispatch,user:userInfo} = useContext(UserContext);
+  const {userDispatch,user:{userInfo}} = useContext(UserContext);
 
 useEffect(()=>{
   if(userInfo&&userInfo.name) return navigate("/")

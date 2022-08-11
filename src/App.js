@@ -1,4 +1,4 @@
-import React from 'react';  
+import React, { useContext, useEffect, useState } from 'react';  
 import './App.css';
 import { Routes, Route} from "react-router-dom";
 import ArticleCreate from './pages/articles/ArticleCreate';
@@ -7,17 +7,15 @@ import ArticleDetail from './pages/articles/ArticleDetail';
 import Signup from './pages/accounts/Signup';
 import Login from './pages/accounts/Login';
 import { ToastContainer } from "react-toastify";
-import { articles } from './utils/articles';
 
 
 const App = () => {
-
   return (
     <div className="wrapper">
       <ToastContainer />
       <Routes>
-      <Route path="*" element={<ArticleList articles={articles}/>} />
-        <Route path="/" exact element={<ArticleList articles={articles}/>} />
+      <Route path="*" element={<ArticleList />} />
+        <Route path="/" exact element={<ArticleList/>} />
 
         <Route
           path="/create/article"

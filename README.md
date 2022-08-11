@@ -6,7 +6,7 @@ Consists of authorization, Json Web Token(JWT) authentication, database connecti
 To begin with run
 ### `npm install` 
 make sure you have mongodb installed on your machine because this api uses the mongodb server installed on your machine.
-after successfulll installation run 
+after successfull installation run 
 ### `node index.js`
 
 clone the frontend at ( https://github.com/Goddiegold/DjangonauticProject-React-)

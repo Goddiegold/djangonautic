@@ -2,5 +2,8 @@
   "jwtPrivateKey": "12345",
   "db": "mongodb://localhost:27017/djangonautic",
   "port": "1000",
-  "requiresAuth": true
+  "requiresAuth": true,
+  "cloudinary_name":"dyxk7wdj7",
+  "cloudinary_api_key":"359116553671187",
+  "cloudinary_api_secret":"BnOAKBNFyQcoVO_JFnYjZnx5d4s"
 }

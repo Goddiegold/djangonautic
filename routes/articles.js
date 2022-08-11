@@ -4,6 +4,8 @@ const { Article, validateArticle } = require("../models/article");
 const { User } = require("../models/user");
 const multer = require('multer');
 const auth = require("../middleware/auth");
+const uploadMiddleware = require("../middleware/uploadFileMiddleware");
+const {uploadFile, deleteFile} = require("../utils/uploadFile");
 
 router.get("/", async (req, res) => {
   const articles = await Article.find().sort("title");
@@ -20,12 +22,12 @@ router.get("/:id", async (req, res) => {
 });
 
 
-router.post("/", auth, async (req, res) => {
+router.post("/",[ auth,uploadMiddleware.single("thumb")] ,async (req, res) => {
   const { error } = validateArticle(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) {
+    await deleteFile(req.file.path)
+    return res.status(400).send(error.details[0].message);}
 
-  //  const user = await User.findById(req.body.userId);
-  // if (!user) return res.status(400).send("Invalid user");
 
     function slugify(val) {
       return val
@@ -36,16 +38,20 @@ router.post("/", auth, async (req, res) => {
         .replace(/[\s\W-]+/g, "-"); // Replace spaces, non-word characters and dashes with a single dash (-)
   }
   
-
+  // console.log(req.file)
+const data = await uploadFile(req.file.path)
+// console.log(data)
   const article = new Article({
     title: req.body.title,
     body: req.body.body,
-    author: req.user._id,
-    thumb:req.body.thumb,
+    author: req.user.name,
+    owner:req.user._id,
+    thumb:data.secure_url,
+    thumb_id:data.public_id,
     slug:slugify(req.body.title)
   });
-
-  await article.save();
+await deleteFile(req.file.filename)
+  await article.save(); 
  return res.send(article);
 });
 module.exports = router;

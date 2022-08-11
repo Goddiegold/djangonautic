@@ -7,6 +7,7 @@ const users = require('./routes/users');
 const cors = require("cors");
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
+const morgan = require("morgan")
  
 
  if (!config.get("jwtPrivateKey")) {
@@ -20,6 +21,7 @@ Joi.objectId = require("joi-objectid")(Joi);
    .then(() => console.log("Connected to MongoDB, [/^_^/]..."))
   .catch(err => console.error("Couldn't connect to MongoDB", err));
 
+  app.use(morgan("dev"))
   app.use(cors());
  app.use(express.urlencoded({ extended: true, limit: "5mb" }));
  app.use(express.json({limit: '5mb'}));

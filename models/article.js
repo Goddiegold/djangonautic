@@ -27,15 +27,24 @@ const articleSchema = new mongoose.Schema({
     default: Date.now(),
   },
 
-  author:{
+  owner:{
     type: mongoose.Schema.Types.ObjectId,
     ref:"user",
     required:true,
   },
+  author:{
+    type:String,
+    required:true
+  },
   thumb: {
     type: String,
-    default:"./assets/default.png"
-  }
+  },
+  thumb_id:{
+    type:String
+  },
+  thumb_url:{
+type:String,
+  },
 },{timestamps:true});
 
 const Article = mongoose.model("articles",articleSchema);
@@ -43,9 +52,10 @@ const Article = mongoose.model("articles",articleSchema);
 function validateArticle(article) {
   const schema = {
     title: Joi.string().min(5).max(50).required(),
-      author: Joi.objectId().required(),
+      owner: Joi.objectId(),
+      author: Joi.string(),
     body: Joi.string().min(20).required(),
-    slug: Joi.string().required(),
+    slug: Joi.string(),
     thumb:Joi.string(),
   };
 

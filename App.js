@@ -1,7 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createContext, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AuthNavigator from './app/navigation/AuthNavigator';
 import AppNavigator from './app/navigation/AppNavigator';
+import { getUser, removeToken} from './app/utils';
+import UserContext from './app/context/UserContext';
 
 export default function App() {
   const [user, setUser] = useState({
@@ -11,7 +13,17 @@ export default function App() {
     token: ""
   })
 
-  const UserContext = createContext()
+  const restoreUser = async () => {
+    if(user.name) {
+      console.log(user);
+      return};
+    const currentUser = getUser()
+  setUser(currentUser)
+  }
+
+  useEffect(()=>{
+restoreUser()
+  },[])
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

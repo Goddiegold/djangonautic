@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import AppImageBackground from '../../components/AppImageBackground';
 import Screen from '../../components/Screen';
+import { useUserContext } from '../../context/UserContext';
+import { getUser } from '../../utils';
 
 export const defaultThumb = require("../../assets/default.png");
 export const date = `2022-07-25T11:32:02.270+00:00`
@@ -66,10 +68,11 @@ const articles = [
 ];
 
 function ArticleListScreen() {
+  const {user} = useUserContext()
   return (
     <AppImageBackground>
     <Screen style={styles.wrapper}>
-      <Text style={styles.text}>Article List</Text>
+      <Text style={styles.text}>{user.name}</Text>
       <View style={styles.articles}>
 
         <FlatList

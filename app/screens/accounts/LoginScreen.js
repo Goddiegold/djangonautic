@@ -1,9 +1,12 @@
-import react, { useState } from 'react';
+import React, {useState } from 'react';
 import { StyleSheet, View, Text, Alert } from 'react-native';
 import FormField from '../../components/FormField';
 import Constants from 'expo-constants';
 import AppButton from '../../components/AppButton';
 import AppImageBackground from '../../components/AppImageBackground';
+import {login} from "../../services/userService";
+import { decodeUserToken, storeToken } from '../../utils';
+import { useUserContext } from '../../context/UserContext';
 
 export const customFormStyles = {
     borderRadius: 10,
@@ -36,11 +39,28 @@ function LoginScreen() {
         password: ""
     })
 
+    const [loading,setLoading] = useState(false)
+
+    const {setUser:_setUser} = useUserContext()
 
     const handleFormSubmit = () => {
         if (!user.email || !user.password) return Alert.alert("Fill all values!")
         // console.log(typeof(user.email))
         console.log(user);
+
+        setLoading(true)
+        login(user).then(async res=>{
+            console.log(res.data)
+            const token = res.headers["auth-token"]
+            const user = decodeUserToken(token)
+            _setUser(user)
+           storeToken(token)
+            setLoading(false)
+        }).catch(err=>{
+            setLoading(false)
+            console.log(err)
+            Alert.alert(err.response.data)
+        })
     }
 
     return (
@@ -49,7 +69,7 @@ function LoginScreen() {
             <Text style={styles.header}>Hi 👋, welcome back here.</Text>
             <FormField placeholder={"Email"} value={user.email} handleChange={(text) => setUser({ ...user, email: text })} />
             <FormField placeholder={"Password"} value={user.password} handleChange={(text) => setUser({ ...user, password: text })} />
-            <AppButton title={"Login"}
+            <AppButton title={loading?"Please wait...":"Login"}
                 onPress={handleFormSubmit}
                 customStyles={customFormStyles}
             />

@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import AppImageBackground from '../../components/AppImageBackground';
+import Header from '../../components/Header';
 import Screen from '../../components/Screen';
-import { useUserContext } from '../../context/UserContext';
-import { getUser } from '../../utils';
 
 export const defaultThumb = require("../../assets/default.png");
 export const date = `2022-07-25T11:32:02.270+00:00`
@@ -67,12 +66,12 @@ const articles = [
   },
 ];
 
-function ArticleListScreen() {
-  const {user} = useUserContext()
+function ArticleListScreen({navigation}) {
   return (
     <AppImageBackground>
     <Screen style={styles.wrapper}>
-      <Text style={styles.text}>{user.name}</Text>
+    <Header navigation={navigation}/>
+      {/* <Text style={styles.text}>Article List</Text> */}
       <View style={styles.articles}>
 
         <FlatList
@@ -108,8 +107,8 @@ const styles = StyleSheet.create({
   articles: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-around"
-
+    justifyContent: "space-around",
+    minWidth:"80%"
     // display: grid;
     // grid-template-columns: 1fr 1fr 1fr;
     // grid-gap: 30px;

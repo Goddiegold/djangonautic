@@ -1,9 +1,6 @@
 import axios from "axios";
 import { getToken } from "../utils";
 
-function log(err) {
-  console.log(err);
-}
 
 const instance = axios.create({
     baseURL: "http://10.0.2.2:1000/api"
@@ -20,7 +17,7 @@ instance.interceptors.response.use(null, (error) => {
   // - Display generic and friendly error message to user
 
   if (!expectedError) {
-    log(error);
+  console.log(error);
   }
   return Promise.reject(error);
 });

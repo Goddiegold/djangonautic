@@ -14,10 +14,8 @@ export default function App() {
   })
 
   const restoreUser = async () => {
-    if(user.name) {
-      console.log(user);
-      return};
-    const currentUser = getUser()
+    if(user.name) return;
+    const currentUser = await getUser()
   setUser(currentUser)
   }
 

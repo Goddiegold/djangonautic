@@ -7,6 +7,7 @@ import AppImageBackground from '../../components/AppImageBackground';
 import {login} from "../../services/userService";
 import { decodeUserToken, storeToken } from '../../utils';
 import { useUserContext } from '../../context/UserContext';
+import ErrorMessage from '../../components/ErrorMessage';
 
 export const customFormStyles = {
     borderRadius: 10,
@@ -40,6 +41,7 @@ function LoginScreen() {
     })
 
     const [loading,setLoading] = useState(false)
+    const [error,setError] = useState('')
 
     const {setUser:_setUser} = useUserContext()
 
@@ -49,7 +51,7 @@ function LoginScreen() {
         console.log(user);
 
         setLoading(true)
-        login(user).then(async res=>{
+        login(user).then(res=>{
             console.log(res.data)
             const token = res.headers["auth-token"]
             const user = decodeUserToken(token)
@@ -58,17 +60,22 @@ function LoginScreen() {
             setLoading(false)
         }).catch(err=>{
             setLoading(false)
-            console.log(err)
-            Alert.alert(err.response.data)
+           setError(err)
         })
     }
 
     return (
         <AppImageBackground>
         <View style={styles.container}>
+       {error && <ErrorMessage err={error}/>}
             <Text style={styles.header}>Hi 👋, welcome back here.</Text>
-            <FormField placeholder={"Email"} value={user.email} handleChange={(text) => setUser({ ...user, email: text })} />
-            <FormField placeholder={"Password"} value={user.password} handleChange={(text) => setUser({ ...user, password: text })} />
+            <FormField placeholder={"Email"} value={user.email} handleChange={(text) => {
+                if(error) setError('')
+                setUser({ ...user, email: text })}
+                } />
+            <FormField placeholder={"Password"} value={user.password} handleChange={(text) => {
+                if(error) setError('')
+                setUser({ ...user, password: text })}} />
             <AppButton title={loading?"Please wait...":"Login"}
                 onPress={handleFormSubmit}
                 customStyles={customFormStyles}

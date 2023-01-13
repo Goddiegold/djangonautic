@@ -1,7 +1,7 @@
 import React,{useEffect} from 'react';
 import {StyleSheet,View,Image, TouchableWithoutFeedback, Alert} from 'react-native';
-import {MaterialCommunityIcons} from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import AppIcon from './AppIcon';
 
 function ImageInput({imageUri=[],onChangeImage}) {
     async function selectImage(){
@@ -39,7 +39,7 @@ function handlePress(){
 return(
     <TouchableWithoutFeedback onPress={handlePress} >
         <View style={styles.container}>
-{!imageUri? <MaterialCommunityIcons name='camera' size={40} color={"#6e6969"}/>
+{!imageUri? <AppIcon name='camera' size={40} color={"#6e6969"}/>
 :
 <Image source={{uri:imageUri}} style={styles.image}/>
 }

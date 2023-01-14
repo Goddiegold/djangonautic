@@ -70,7 +70,7 @@ function ArticleListScreen({navigation}) {
   return (
     <AppImageBackground>
     <Screen style={styles.wrapper}>
-    <Header navigation={navigation}/>
+    {/* <Header navigation={navigation}/> */}
       {/* <Text style={styles.text}>Article List</Text> */}
       <View style={styles.articles}>
 

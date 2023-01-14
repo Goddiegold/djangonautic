@@ -1,7 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import AuthNavigator from './app/navigation/AuthNavigator';
+import AuthNavigator, { ArticleDetailsNavigator } from './app/navigation/AuthNavigator';
 import AppNavigator from './app/navigation/AppNavigator';
+import navigationTheme from "./app/navigation/navigationTheme";
 import { getUser, removeToken} from './app/utils';
 import UserContext from './app/context/UserContext';
 
@@ -13,9 +14,11 @@ export default function App() {
     token: ""
   })
 
+
   const restoreUser = async () => {
     if(user.name) return;
     const currentUser = await getUser()
+    if(!currentUser) return;
   setUser(currentUser)
   }
 
@@ -25,8 +28,8 @@ restoreUser()
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <NavigationContainer>
-        {!user.name ? <AuthNavigator /> : <AppNavigator />}
+      <NavigationContainer theme={navigationTheme}>
+        {!user?.name ? <AuthNavigator /> : <AppNavigator />}
       </NavigationContainer>
     </UserContext.Provider>
   );

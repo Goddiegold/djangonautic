@@ -1,24 +1,24 @@
-import React, { useContext, useTransition } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity} from 'react-native';
-import UserContext from '../context/UserContext';
-import { removeToken } from '../utils';
-import AppIcon from './AppIcon';
+import React, { useContext } from 'react';
+import { StyleSheet, View,Text, TouchableOpacity } from 'react-native';
+import Screen from '../../components/Screen';
+import UserContext from '../../context/UserContext';
+import AppIcon from '../../components/AppIcon';
+import { removeToken } from '../../utils';
 
-function Header({navigation}) {
 
-    const navigate = route =>  navigation.navigate(route)
-
-    const {user,setUser} = useContext(UserContext);
-
+function AccountScreen({navigation}) {
+    const {user,setUser} = useContext(UserContext)
     const handleLogout = () => {
-setUser({})
-removeToken()
-    }
+        setUser({})
+        removeToken()
+            }
+    const navigate = route =>  navigation.navigate(route)
     return (
+        <Screen>
         <View style={styles.container}>
         <Text style={[styles.text]}>Welcome {user} 👋</Text>
         <TouchableOpacity onPress={()=>navigate("CreateArticle")}>
-        <Text style={[styles.text, styles.text2]}>Create Article{" "}
+        <Text style={styles.text}>Create Article{" "}
               <AppIcon name='add-box' type2={true} size={17}/>
               </Text>
         </TouchableOpacity>
@@ -27,6 +27,7 @@ removeToken()
             <Text style={[styles.text]}>Logout <AppIcon name='logout' size={17}/></Text>
            </TouchableOpacity>
         </View>
+        </Screen>
     )
 }
 const styles = StyleSheet.create({
@@ -51,4 +52,4 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     }
 })
-export default Header;
+export default AccountScreen;

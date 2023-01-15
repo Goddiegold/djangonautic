@@ -1,6 +1,6 @@
 {
   "jwtPrivateKey": "12345",
-  "db": "mongodb://localhost:27017/djangonautic",
+  "db": "mongodb+srv://godiwn:790P2OKZWiptYZrE@cluster0.eslw4db.mongodb.net/?retryWrites=true&w=majority",
   "port": "1000",
   "requiresAuth": true,
   "cloudinary_name":"dyxk7wdj7",

@@ -23,6 +23,7 @@ router.get("/:id", async (req, res) => {
 
 
 router.post("/",[ auth,uploadMiddleware.single("thumb")] ,async (req, res) => {
+  console.log(req)
   const { error } = validateArticle(req.body);
   if (error) {
     await deleteFile(req.file.path)
@@ -38,7 +39,7 @@ router.post("/",[ auth,uploadMiddleware.single("thumb")] ,async (req, res) => {
         .replace(/[\s\W-]+/g, "-"); // Replace spaces, non-word characters and dashes with a single dash (-)
   }
   
-  // console.log(req.file)
+  
 const data = await uploadFile(req.file.path)
 // console.log(data)
   const article = new Article({

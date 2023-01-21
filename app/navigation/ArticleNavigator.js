@@ -10,7 +10,11 @@ function ArticleNavigator(props) {
     return (
 <Stack.Navigator screenOptions={{animation:"slide_from_bottom"}}>
     <Stack.Screen name='ArticlesList' component={ArticleListScreen} options={{...options}}/>
-    <Stack.Screen name='ArticleDetails' component={ArticleDetailsScreen} options={{...options}}/>
+    <Stack.Screen name='ArticleDetails' component={ArticleDetailsScreen}
+    options={{title:"Article Details"}}
+    //  options={{...options}}
+
+     />
 </Stack.Navigator>
     );
 }

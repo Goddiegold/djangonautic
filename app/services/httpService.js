@@ -3,7 +3,10 @@ import { getToken } from "../utils";
 
 
 const instance = axios.create({
-    baseURL: "http://10.0.2.2:1000/api"
+     baseURL: "https://djangonautic-react.onrender.com/api"
+    //baseURL: "http://192.168.8.100:1000/api"
+  //  baseURL: "http://192.168.0.135:1000/api"
+    // baseURL: "http://10.0.2.2:1000/api"
 })
 
 instance.interceptors.response.use(null, (error) => {

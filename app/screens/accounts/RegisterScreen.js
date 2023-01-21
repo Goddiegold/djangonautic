@@ -5,8 +5,9 @@ import AppButton from '../../components/AppButton';
 import { logRegStyles,customFormStyles } from './LoginScreen';
 import AppImageBackground from '../../components/AppImageBackground';
 import { register } from '../../services/userService';
-import { storeToken } from '../../utils';
+import { storeToken,decodeUserToken } from '../../utils';
 import { useUserContext } from '../../context/UserContext';
+import ErrorMessage from '../../components/ErrorMessage';
 
 
 function RegisterScreen() {
@@ -16,6 +17,8 @@ function RegisterScreen() {
         email: "",
         password: ""
     })
+
+    const [error,setError] = useState('')
 
     const {setUser:_setUser} = useUserContext();
 
@@ -28,19 +31,21 @@ const [loading,setLoading] = useState(false)
         setLoading(true)
         register(user).then(async res=>{
             console.log(res.data)
-            const token = res
-             storeToken(res.headers["auth-token"])
+            const token = res.headers["auth-token"]
+            const user = decodeUserToken(token)
+            _setUser(user)
+           storeToken(token)
             setLoading(false)
         }).catch(err=>{
             setLoading(false)
-            console.log(err)
-            Alert.alert(err.response.data)
+            setError(err)
         })
     }
 
     return (
         <AppImageBackground>
         <View style={styles.container}>
+        {error && <ErrorMessage err={error}/>}
             <Text style={styles.header}>Hi 👋, welcome back here.</Text>
             <FormField placeholder={"Name"} value={user.name} handleChange={(text) => setUser({ ...user, name: text })} />
             <FormField placeholder={"Email"} value={user.email} handleChange={(text) => setUser({ ...user, email: text })} />

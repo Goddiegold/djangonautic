@@ -14,6 +14,8 @@ export default function App() {
     token: ""
   })
 
+  const [articles,setArticles] = useState([])
+
 
   const restoreUser = async () => {
     if(user.name) return;
@@ -27,7 +29,7 @@ restoreUser()
   },[])
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, articles,setArticles}}>
       <NavigationContainer theme={navigationTheme}>
         {!user?.name ? <AuthNavigator /> : <AppNavigator />}
       </NavigationContainer>

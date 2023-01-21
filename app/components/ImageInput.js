@@ -3,7 +3,7 @@ import {StyleSheet,View,Image, TouchableWithoutFeedback, Alert} from 'react-nati
 import * as ImagePicker from "expo-image-picker";
 import AppIcon from './AppIcon';
 
-function ImageInput({imageUri=[],onChangeImage}) {
+function ImageInput({imageUri='',onChangeImage}) {
     async function selectImage(){
         try{
            const result = await ImagePicker.launchImageLibraryAsync({
@@ -27,7 +27,7 @@ function ImageInput({imageUri=[],onChangeImage}) {
         },[]);
 
 function handlePress(){
-    if(imageUri.length==0) selectImage();
+    if(imageUri.length===0) selectImage();
     else Alert.alert('Delete','Are you sure you want to delete this image?',[
         {text:"Yes",onPress:()=>onChangeImage(null)},
         {text:'No'}

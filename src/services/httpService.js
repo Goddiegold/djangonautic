@@ -23,7 +23,7 @@ axios.interceptors.response.use(null, (error) => {
 
 
 const instance = axios.create({
-    baseURL:"http://localhost:1000/api"
+    baseURL:"/api"
 })
 
 export default instance;

@@ -75,8 +75,8 @@ const ArticleCreate = ({articles}) => {
             // value={thumb}
             onChange={({ target }) => {
               const file = target.files[0];
-              const formData = new FormData();
-              formData.append('thumb',file)
+                const formData = new FormData();
+                formData.append('thumb',file)
             console.log(target.files[0])
             setArticle({...article,thumb:file})
             }}

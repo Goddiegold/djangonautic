@@ -25,7 +25,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", [auth, uploadMiddleware.array("thumb", 1)], async (req, res) => {
   console.log("article upload files-->",req.files)
   const { error } = validateArticle(req.body);
-  const file = req.files?.length > 0 ? req.files[o] :
+  const file = req.files?.length > 0 ? req.files[0] :
     { path: "", filename: "" }
   if (error) {
     await deleteFile(file.path)

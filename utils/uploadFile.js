@@ -12,6 +12,7 @@ cloudinary.config({
 
 
 exports.uploadFile = (file) => {
+  if(!file) return;
   return new Promise((resolve,reject) => {
     cloudinary.uploader.upload( 
       file,
@@ -28,7 +29,8 @@ exports.uploadFile = (file) => {
   });
 };
 
-exports.deleteFile = async (file) =>{  
+exports.deleteFile = async (file) =>{ 
+  if(!file) return; 
   await unlink(`public/uploads/${file}`, function (err) {
     if(err) console.log(err)
     else console.log(`${file} deleted!`)

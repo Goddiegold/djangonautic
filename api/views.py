@@ -7,6 +7,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.mixins import ListModelMixin,CreateModelMixin
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.viewsets import ModelViewSet
 
 from .models import Article
 from .serializers import ArticleSerializer
@@ -94,18 +95,28 @@ from .serializers import ArticleSerializer
 #generics view 
 # (ListCreateAPIView inherits from  ListModelMixin,CreateModelMixin)
 # ListCreateAPIView - get all articles and add new articles
-class ArticlesList(ListCreateAPIView):
-    queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
+# class ArticlesList(ListCreateAPIView):
+#     queryset = Article.objects.all()
+#     serializer_class = ArticleSerializer
 
-    def get_serializer_context(self):
-        return {'request':self.request}
+#     def get_serializer_context(self):
+#         return {'request':self.request}
                     
 
 # ListCreateAPIView - get all articles and add new articles
-class ArticleDetails(RetrieveUpdateAPIView,RetrieveUpdateDestroyAPIView):
-      queryset = Article.objects.all()
-      serializer_class = ArticleSerializer
+# class ArticleDetails(RetrieveUpdateAPIView,RetrieveUpdateDestroyAPIView):
+#       queryset = Article.objects.all()
+#       serializer_class = ArticleSerializer
 
-      def get_serializer_context(self):
+#       def get_serializer_context(self):
+#         return {'request':self.request}
+
+
+
+##########viewsets#######
+class ArticleViewSet(ModelViewSet):
+     queryset = Article.objects.all()
+     serializer_class = ArticleSerializer
+
+     def get_serializer_context(self):
         return {'request':self.request}

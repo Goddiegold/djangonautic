@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.mixins import ListModelMixin,CreateModelMixin
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Article
 from .serializers import ArticleSerializer

@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from djoser.serializers import UserCreateSerializer, UserSerializer
 from .models import Article
 
 
@@ -13,3 +14,15 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = ['id','title','body','slug','image']
+
+
+
+class AppUserCreateSerializer(UserCreateSerializer):
+    class Meta(UserCreateSerializer.Meta):
+        fields = ['id','username','password', 'email']
+
+
+class AppCurrentUserSerializer(UserSerializer):
+    
+    class Meta(UserSerializer.Meta):
+        fields =['id','username','email']

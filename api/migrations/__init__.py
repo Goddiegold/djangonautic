@@ -2,7 +2,7 @@ from api.models import CustomUser
 
 def seed_data():
         print('started admin user')
-        user = CustomUser(username="Godwin",
+        user = CustomUser(name="Godwin",
         email="godwin@gmail.com",
         is_staff=True,
         is_superuser=True)
@@ -12,4 +12,4 @@ def seed_data():
         print('stopped admin user')
 
 
-# seed_data()
+#seed_data()

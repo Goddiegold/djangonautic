@@ -1,6 +1,10 @@
-from rest_framework import serializers
+from django.shortcuts import get_object_or_404
+
+from rest_framework import serializers, response,status
+
 from djoser.serializers import UserCreateSerializer, UserSerializer
-from .models import Article
+
+from .models import Article,CustomUser
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -15,12 +19,12 @@ class ArticleSerializer(serializers.ModelSerializer):
         user = self.context.get('request').user if self.context.get('request') else ""
         return super().create({**validated_data,'author':user})
     
-    def update(self, instance, validated_data):
-        print("instance-->", instance)
-        user = self.context.get('request').user if self.context.get('request') else ""
-        if instance.author == user:
-            return super().update(instance, validated_data)
-        return super().update(instance, instance)
+    # def update(self, instance, validated_data):
+    #     print("instance-->", instance)
+    #     user = self.context.get('request').user if self.context.get('request') else ""
+    #     if instance.author == user:
+    #         return super().update(instance, validated_data)
+    #     return response.Response({'message':'Not allowed to edit!'},status=status.HTTP_403_FORBIDDEN)
 
     class Meta:
         model = Article
@@ -28,10 +32,20 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 
+
 class GetArticleSerializer(serializers.ModelSerializer):
+
+    author_name = serializers.SerializerMethodField(method_name='author_method')
+
+    def author_method(self,data:Article):
+        author =  get_object_or_404(CustomUser, pk=data.author.id)
+        return author.username
+
+    
     class Meta:
         model = Article
-        fields = ['id','title','body','slug','image','author']
+        fields = ['id','title','body','slug','image','author_name']
+
 
 
 
@@ -41,10 +55,10 @@ class AppUserCreateSerializer(UserCreateSerializer):
     # def update(self, instance, validated_data):
     #     return super().update(instance, validated_data)
 
-
-    
     class Meta(UserCreateSerializer.Meta):
         fields = ['id','username','password', 'email']
+
+
 
 
 class AppCurrentUserSerializer(UserSerializer):

@@ -6,7 +6,6 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
      email = models.EmailField(unique=True)
-     featured_articles = models.ForeignKey('Article', on_delete=models.SET_NULL,null=True,related_name='+')
      username =  models.CharField(
         max_length=150,
         unique=True,

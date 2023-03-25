@@ -14,7 +14,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from .models import Article
 from .serializers import ArticleSerializer, GetArticleSerializer
-
+from  .permissions import IsAuthor
 
 # Create your views here.
 
@@ -114,19 +114,41 @@ from .serializers import ArticleSerializer, GetArticleSerializer
 
 ########## viewsets#######
 class ArticleViewSet(ModelViewSet):
-    queryset = Article.objects.select_related("author__featured_articles").all()
+    queryset = Article.objects.prefetch_related("author").all()
     # serializer_class = ArticleSerializer
 
+    def update(self, request:HttpRequest, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance:Article = self.get_object()
+        print("instance.author.email-->",instance.author.email)
+        print("request.user.email-->",request.user.email)
+        if instance.author.email != request.user.email:
+            return Response({'message':'Not Authorized'},status=status.HTTP_401_UNAUTHORIZED)
+        else:
+             serializer = self.get_serializer(instance,data=request.data, partial=partial)
+             serializer.is_valid(raise_exception=True)
+             self.perform_update(serializer)
+             return Response(serializer.data)
+     
+        #     # if getattr(instance, '_prefetched_objects_cache', None):
+        #     # # If 'prefetch_related' has been applied to a queryset, we need to
+        #     # # forcibly invalidate the prefetch cache on the instance.
+        #     #   instance._prefetched_objects_cache = {}
+        #     # return Response(serializer.data)
+        # else:
+            
    
 
-    # def retrieve(self, request, *args, **kwargs):
-    #     instance = self.get_object()
-    #     serializer = self.get_serializer(instance)
-    #     print(serializer.data)
-    #     return Response(serializer.data)
-    # #  return super().retrieve(request, *args, **kwargs)
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        print("instance-->",instance)
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+        
+    #  return super().retrieve(request, *args, **kwargs)
 
     def get_permissions(self):
+        print("action-->",self.action)
         if self.action == 'create':
             return [IsAuthenticated()]
         return super().get_permissions()

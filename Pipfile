@@ -9,6 +9,7 @@ pillow = "*"
 djangorestframework = "*"
 djoser = "*"
 djangorestframework-simplejwt = "*"
+drf-yasg = "*"
 
 [dev-packages]
 autopep8 = "*"

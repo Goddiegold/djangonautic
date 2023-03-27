@@ -2,19 +2,19 @@ import React, { useContext, useEffect } from "react"
 import { UserContext } from "../../context/UserContext";
 import { getAllArticles } from "../../services/userService";
 import Article from "./Article";
-import { GET_ALL_ARTICLES } from "../../context/UserContext";
-import {JitsiMeeting,JaaSMeeting} from "@jitsi/react-sdk"
-import { Navigate, useNavigate } from "react-router-dom";
+import { USER_ACTION } from "../../context/UserContext";
+// import {JitsiMeeting,JaaSMeeting} from "@jitsi/react-sdk"
+// import { useNavigate } from "react-router-dom";
 
 
 const ArticleList = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const {user:{articles},userDispatch} = useContext(UserContext);
   useEffect(()=>{
     getAllArticles().then(res=>{
       console.log(res.data)
         userDispatch({
-          type:GET_ALL_ARTICLES,
+          type:USER_ACTION.GET_ALL_ARTICLES,
           payload:res.data
         })
         
@@ -64,7 +64,7 @@ const ArticleList = () => {
    /> */}
       <h1>Articles List</h1>
       <div className="articles">
-        {articles.map((article,idx) => (
+        {articles.map((article:any,idx:any) => (
           <Article
             key={idx}
             article={article}

@@ -3,9 +3,10 @@ import { toast } from "react-toastify";
 import { createArticle } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
+import {AxiosError} from "axios";
 
 
-const ArticleCreate = ({articles}) => {
+const ArticleCreate = () => {
   
   let navigate = useNavigate();
   const {user} = useContext(UserContext)
@@ -16,16 +17,16 @@ const ArticleCreate = ({articles}) => {
   const [article, setArticle] = useState({
     title: "",
     body: "",
-    thumb:"./assets/default.png"
+    thumb: File
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:React.FormEvent) => {
     e.preventDefault();
-     createArticle(article,user.userInfo.token).then(res => {
+     createArticle(article).then(res => {
       console.log(res)
       navigate("/")
-    }).catch(err=>{
-      toast.error("Pls try again later!")
+    }).catch((err)=>{
+      toast.error(err.response?.data ? err.response.data : "Pls try again Later")
       console.log(err)
   });
   }
@@ -74,10 +75,10 @@ const ArticleCreate = ({articles}) => {
             id="thumb"
             // value={thumb}
             onChange={({ target }) => {
-              const file = target.files[0];
+              const file = target.files?.[0];
                 const formData = new FormData();
                 formData.append('thumb',file)
-            console.log(target.files[0])
+            // console.log(target.files[0])
             setArticle({...article,thumb:file})
             }}
           />

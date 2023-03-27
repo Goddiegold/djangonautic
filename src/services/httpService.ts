@@ -1,5 +1,6 @@
 import axios from "axios";
 import {toast} from "react-toastify"
+import { djangonauticUserToken } from "../context/UserContext";
 
 function log(err) {
   console.log(err);
@@ -22,8 +23,19 @@ axios.interceptors.response.use(null, (error) => {
 });
 
 
+
+
+
 const instance = axios.create({
-    baseURL:"/api"
+    // baseURL:"/api"
+    baseURL:"http://localhost:1000/api"
+})
+
+instance.interceptors.request.use(async config=>{
+  const token = localStorage.getItem(djangonauticUserToken)
+  if(!token) return config; 
+  config.headers['auth-token'] = token;
+	return config;
 })
 
 export default instance;

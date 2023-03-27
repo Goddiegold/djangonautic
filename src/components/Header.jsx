@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import logo from "../img/logo.png";
 import { Link } from "react-router-dom";
-import { UserContext, USER_LOGOUT } from "../context/UserContext";
+import { UserContext, USER_ACTION } from "../context/UserContext";
 
 
 
 const Header = () => {
   const {user,userDispatch} = useContext(UserContext);
-
+console.log("user-->",user);
 
   function logout(){
     userDispatch({
-      type:USER_LOGOUT
+      type:USER_ACTION.USER_LOGOUT
     })
   }
 

@@ -1,7 +1,6 @@
 import React, {  useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { GET_ARTICLE, UserContext } from '../../context/UserContext';
 import { getArticle } from '../../services/userService';
 
 const ArticleDetail = () => {
@@ -25,7 +24,7 @@ getArticle(id).then(res=>{
     return (
       <div className="article-detail">
         <div className="article">
-          <img src={article.thumb}/>
+          <img src={article.thumb ? article.thumb : './assets/default.png'} alt=""/>
           <h2>{article.title}</h2>
           <p>{article.body}</p>
           <p>{article.date.substring(0,10)} at {article.date.substring(11,16)}</p>

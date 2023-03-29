@@ -27,8 +27,8 @@ axios.interceptors.response.use(null, (error) => {
 
 
 const instance = axios.create({
-    // baseURL:"/api"
-    baseURL:"http://localhost:1000/api"
+     baseURL:"/api"
+   // baseURL:"http://localhost:1000/api"
 })
 
 instance.interceptors.request.use(async config=>{

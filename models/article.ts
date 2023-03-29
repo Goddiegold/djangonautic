@@ -59,7 +59,7 @@ type ArticleType = {
 export const validateArticle = (article:ArticleType) => {
   const schema = Joi.object({
     title: Joi.string().min(5).max(50).required(),
-      owner: Joi.string().required(),
+      owner: Joi.string(),
       author: Joi.string(),
     body: Joi.string().min(20).required(),
     slug: Joi.string(),

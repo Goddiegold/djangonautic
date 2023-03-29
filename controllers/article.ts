@@ -14,7 +14,7 @@ export const addArticle: RequestHandler = async (req: any, res, next) => {
     const file = req.files!.length > 0 ? req.files[0] :
         { path: "", filename: "" }
     if (error) {
-        await deleteFile(file.path)
+        await deleteFile(file.filename)
         return res.status(400).send(error.details[0].message);
     }
 

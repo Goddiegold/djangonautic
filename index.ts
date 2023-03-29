@@ -1,15 +1,14 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const config = require("config");
-const mongoose = require("mongoose");
-const articles = require('./routes/articles');
-const users = require('./routes/users');
-const cors = require("cors");
-const Joi = require("joi");
-Joi.objectId = require("joi-objectid")(Joi);
-const morgan = require("morgan")
-var history = require('connect-history-api-fallback');
-const path = require('path')
+import config from "config";
+import {connect as mongooseConnect} from "mongoose";
+import articles from './routes/articles';
+import users from './routes/users';
+import cors from "cors";
+import Joi from "joi";
+import morgan from "morgan"
+import routeHistory from 'connect-history-api-fallback';
+import path from 'path'
  
 
  if (!config.get("jwtPrivateKey")) {
@@ -17,7 +16,7 @@ const path = require('path')
    process.exit(1);
  }
  
- app.use(history())
+ app.use(routeHistory())
 app.use(express.static("view"));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "view", "index.html"));
@@ -30,8 +29,7 @@ app.use(express.json({limit: '5mb'}));
 app.use('/api/articles',articles)
 app.use('/api/users',users)
 
- mongoose
-   .connect(config.get("db"))
+ mongooseConnect(config.get("db"))
    .then(() => console.log("Connected to MongoDB, [/^_^/]..."))
   .catch(err => console.error("Couldn't connect to MongoDB", err));
 

@@ -1,9 +1,8 @@
-const mongoose = require("mongoose");
-const Joi = require("joi");
-
+import {Schema as mongooseSchema, Types, model as mongooseModel} from "mongoose";
+import Joi from "joi";
 
     
-const articleSchema = new mongoose.Schema({
+const articleSchema = new mongooseSchema({
   title: {
     type: String,
     required: true,
@@ -15,7 +14,6 @@ const articleSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 20,
-    required: true,
   },
 
   slug: {
@@ -28,7 +26,7 @@ const articleSchema = new mongoose.Schema({
   },
 
   owner:{
-    type: mongoose.Schema.Types.ObjectId,
+    type: Types.ObjectId,
     ref:"user",
     required:true,
   },
@@ -47,21 +45,27 @@ type:String,
   },
 },{timestamps:true});
 
-const Article = mongoose.model("articles",articleSchema);
+export const Article = mongooseModel("articles",articleSchema);
 
-function validateArticle(article) {
-  const schema = {
+type ArticleType = {
+  title:string,
+  owner: string,
+  author: string,
+  body: string,
+  slug: string,
+  thumb:string
+}
+
+export const validateArticle = (article:ArticleType) => {
+  const schema = Joi.object({
     title: Joi.string().min(5).max(50).required(),
-      owner: Joi.objectId(),
+      owner: Joi.string().required(),
       author: Joi.string(),
     body: Joi.string().min(20).required(),
     slug: Joi.string(),
     thumb:Joi.string(),
-  };
+  });
 
-  return Joi.validate(article, schema);
+  return schema.validate(article);
 }
 
-module.exports = {
-  Article,validateArticle
-}

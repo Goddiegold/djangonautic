@@ -29,9 +29,13 @@ app.use(express.json({limit: '5mb'}));
 app.use('/api/articles',articles)
 app.use('/api/users',users)
 
- mongooseConnect(config.get("db"))
-   .then(() => console.log("Connected to MongoDB, [/^_^/]..."))
-  .catch(err => console.error("Couldn't connect to MongoDB", err));
+//  mongooseConnect(config.get("db"))
+//    .then(() => console.log("Connected to MongoDB, [/^_^/]..."))
+//   .catch(err => console.error("Couldn't connect to MongoDB", err));
+
+  mongooseConnect(config.get("db"))
+  .then(() => console.log("Connected to MongoDB, [/^_^/]..."))
+ .catch(err => console.error("Couldn't connect to MongoDB", err));
 
   
  

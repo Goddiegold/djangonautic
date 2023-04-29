@@ -58,13 +58,13 @@
     margin: 10px 20px
   }
   
-  .site-form {
+  .site_form {
     margin-top: 60px;
     border: 1px solid #00dba0;
     padding: 20px;
   }
   
-  .site-form input, .site-form textarea{
+  .site_form input, .site_form textarea{
     display: block;
     margin: 20px 0 0px 0;
     padding: 10px;
@@ -96,7 +96,7 @@
     padding: 0;
   }
   
-  .site-form input[type="submit"]{
+  .site_form input[type="submit"]{
     background: #00dba0;
     border: 0;
     color: #fff;

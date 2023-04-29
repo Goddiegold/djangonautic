@@ -1,4 +1,4 @@
-import React,{useReducer,createContext, useEffect} from 'react';
+import React,{useReducer,createContext, useEffect, useContext} from 'react';
 import { getCurrentUser } from '../services/userService';
 
 export const UserContext = createContext();
@@ -59,3 +59,4 @@ else return {userInfo:{},articles:[]}
 }
 
 export default UserContextProvider;
+

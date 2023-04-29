@@ -11,7 +11,7 @@ export async function login(user) {
   return await http.post("/users/signin", user);
 }
 
-export async function createArticle(article, token) {
+export async function createArticle(article) {
   return await http.post("/articles", article, { headers: { 'Content-Type': "multipart/form-data" } })
 };
 

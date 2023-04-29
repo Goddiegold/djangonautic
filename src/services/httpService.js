@@ -7,8 +7,9 @@ function log(err) {
 }
 
 const instance = axios.create({
+  baseURL:"http://localhost:1000/api"
   // baseURL:"/api"
-  baseURL: "https://djangonautic-react.onrender.com/api"
+ // baseURL: "https://djangonautic-react.onrender.com/api"
 })
 
 instance.interceptors.response.use(null, (error) => {
@@ -23,7 +24,7 @@ instance.interceptors.response.use(null, (error) => {
 
   if (!expectedError) {
     log(error);
-    toast.error('Something went wrong!')
+   // toast.error('Something went wrong!')
   }
   return Promise.reject(error);
 });

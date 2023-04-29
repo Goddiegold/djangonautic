@@ -1,11 +1,10 @@
+import { useState,useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/App.module.css'
-import { ToastContainer } from "react-toastify";
-import Header from '@/components/Header';
+
 import Article from '@/components/Article';
-import { useState } from 'react';
 import { getAllArticles } from '@/services/userService';
 
 
@@ -24,7 +23,11 @@ export async function getStaticProps() {
 }
 
 export default function Home({ articles }) {
-  console.log("Props Aricles-->", articles)
+  // const [hydrate, setHydrated] = useState(false)
+
+  // useEffect(() => setHydrated(true), [])
+
+  // if (!hydrate) return null
   return (
     <>
       <Head>
@@ -33,23 +36,17 @@ export default function Home({ articles }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.wrapper}>
-        <ToastContainer />
-        <Header />
-
-        <>
-          <h1>Articles List</h1>
-          <div className={styles.articles}>
-            {articles.map((article, idx) => (
-              <Article
-                key={idx}
-                article={article}
-              />
-            ))}
-          </div>
-        </>
-
-      </main>
+      <>
+        <h1>Articles List</h1>
+        <div className={styles.articles}>
+          {articles.map((article, idx) => (
+            <Article
+              key={idx}
+              article={article}
+            />
+          ))}
+        </div>
+      </>
     </>
   )
 }

@@ -7,9 +7,9 @@ function log(err) {
 }
 
 const instance = axios.create({
-  baseURL:"http://localhost:1000/api"
+  //baseURL:"http://localhost:1000/api"
   // baseURL:"/api"
- // baseURL: "https://djangonautic-react.onrender.com/api"
+ baseURL: "https://djangonautic-react.onrender.com/api"
 })
 
 instance.interceptors.response.use(null, (error) => {

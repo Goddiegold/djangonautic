@@ -12,4 +12,4 @@ def seed_data():
         print('stopped admin user')
 
 
-#seed_data()
+# seed_data()

@@ -20,10 +20,6 @@ class CustomUser(AbstractUser):
      def __str__(self):
          return self.username     
 
-# class Profile(models.Model):
-#     user = models.OneToOneField(CustomUser,on_delete=models.CASCADE)
-
-
 
 class Article(models.Model):
     title =  models.CharField(max_length=50)

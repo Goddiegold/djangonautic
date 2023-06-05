@@ -16,7 +16,7 @@ function WelcomeScreen({navigation}) {
                      color: "#00dba0",
                      fontWeight:"600"
                 }}>Djangonautic</Text>
-                <Text style={styles.tagline}>Sell What You Don't Need</Text>
+                <Text style={styles.tagline}>Writing made easy...</Text>
             </View>
 
             <View style={styles.buttonContainer}>

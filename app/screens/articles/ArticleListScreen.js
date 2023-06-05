@@ -68,66 +68,62 @@ export const date = `2022-07-25T11:32:02.270+00:00`
 //   },
 // ];
 
-function ArticleListScreen({navigation}) {
+function ArticleListScreen({ navigation }) {
 
-  const {articles,setArticles} = useUserContext()
+  const { articles, setArticles } = useUserContext()
 
   const getArticles = () => {
-    getAllArticles().then(res=>{
+    getAllArticles().then(res => {
       setArticles(res.data)
-    }).catch(err=>console.log(err))
+      console.log("article length-->",res.data.length)
+    }).catch(err => console.log(err))
   }
 
-  useEffect(()=>{
-getArticles()
-  },[])
+  useEffect(() => {
+    getArticles()
+  }, [])
   return (
     <AppImageBackground>
-    <Screen style={styles.wrapper}>
-    {/* <Header navigation={navigation}/> */}
-      {/* <Text style={styles.text}>Article List</Text> */}
-      <View style={styles.articles}>
+      <Screen style={styles.wrapper}>
+        {/* <Header navigation={navigation}/> */}
+        {/* <Text style={styles.text}>Article List</Text> */}
+        <View style={styles.articles}>
+          <Text style={styles.header}>Articles List</Text>
+          <FlatList
+            data={articles}
+            keyExtractor={article => article?._id?.toString()}
+            renderItem={({ item: article }) =>
+              <TouchableOpacity onPress={() => navigation.navigate("ArticleDetails", article)}>
+                <View style={styles.article}>
+                  <Text style={styles.text}>{article.title}</Text>
+                  <Text style={styles.text}>{article.body.slice(0, 20)}...</Text>
+                  <Text style={styles.text}>{article.date.substring(0, 10)} at {article.date.substring(11, 16)}</Text>
+                  <Text style={[styles.author, styles.text]}>{article.author}</Text>
+                </View>
+              </TouchableOpacity>
+            }
+          />
 
-        <FlatList
-          data={articles}
-          keyExtractor={article => article?._id?.toString()}
-          renderItem={({ item: article }) =>
-          <TouchableOpacity onPress={()=>navigation.navigate("ArticleDetails",article)}>
-            <View style={styles.article}>
-             <Text style={styles.text}>{article.title}</Text>
-              <Text style={styles.text}>{article.body.slice(0, 20)}...</Text>
-              <Text style={styles.text}>{article.date.substring(0, 10)} at {article.date.substring(11, 16)}</Text>
-              <Text style={[styles.author, styles.text]}>{article.author}</Text>
-            </View>
-            </TouchableOpacity>
-          }
-        />
-
-      </View>
-    </Screen>
-            </AppImageBackground>
+        </View>
+      </Screen>
+    </AppImageBackground>
 
   )
 }
 const styles = StyleSheet.create({
 
   wrapper: {
-    // maxWidth:"960px",
     marginTop: 50,
     marginBottom: 10,
     marginLeft: "auto",
-    marginRight: "auto"
-    // max-width: 960px;
-    // margin: 0 auto;
+    marginRight: "auto",
+    height:"auto"
   },
   articles: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
-    minWidth:"80%"
-    // display: grid;
-    // grid-template-columns: 1fr 1fr 1fr;
-    // grid-gap: 30px;
+    minWidth: "80%"
   },
   article: {
     marginTop: 10,
@@ -137,10 +133,6 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     position: "relative",
     padding: 45,
-    // padding: 10px;
-    // border: 1px solid #00dba0;
-    // position: relative;
-    // padding-bottom: 40px;
   },
   author: {
     padding: 10,
@@ -150,17 +142,15 @@ const styles = StyleSheet.create({
     bottom: 0,
     margin: 0,
     color: "#f121f"
-    //     padding: 10,
-    // background: #00dba0;
-    // position: absolute;
-    // right: 0;
-    // bottom: 0;
-    // margin: 0;
-    // color: #0f121f;
   },
   text: {
     color: "white",
     fontSize: 18
+  },
+  header: {
+    color:"white",
+    textAlign:"center",
+    fontSize:20
   }
 })
 export default ArticleListScreen;

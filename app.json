@@ -18,7 +18,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.goddiegold.djangonauticReact"
     },
     "android": {
       "package": "com.goddiegold.djangonauticReact",

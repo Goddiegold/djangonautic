@@ -6,7 +6,6 @@ import {
 } from 'typeorm';
 
 
-
 @Entity()
 export class Article {
   @PrimaryGeneratedColumn()

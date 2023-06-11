@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
+import { Article } from 'src/articles/entities/article.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
-  Column
+  Column,
+  OneToMany
 } from 'typeorm';
 
 
@@ -23,4 +25,10 @@ export class User {
 
   @Column({ default: false })
   isAdmin: boolean;
+
+  // @OneToMany(() => Book, book => book.author)
+  // books: Book[];
+
+  @OneToMany(() => Article, article => article.author)
+  articles: Article[]
 }

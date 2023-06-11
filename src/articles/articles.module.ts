@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ArticlesAuthGuard } from 'src/guards/articles.guard';
 import { ArticlesController } from './articles.controller';
 import { ArticlesService } from './articles.service';
 import { Article } from './entities/article.entity';

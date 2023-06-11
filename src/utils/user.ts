@@ -52,9 +52,9 @@ export const generateAuthToken = (USER_TYPE: Account_Type, userId: string) => {
     const returnUserDetails = () => {
         switch (USER_TYPE) {
             case Account_Type.USER:
-                return { key: process.env.USER_KEY, type: Account_Type.USER }
+                return { type: Account_Type.USER }
             case Account_Type.ADMIN:
-                return { key: process.env.ADMIN_KEY, type: Account_Type.ADMIN }
+                return { type: Account_Type.ADMIN }
             default:
                 return null
         }
@@ -63,7 +63,7 @@ export const generateAuthToken = (USER_TYPE: Account_Type, userId: string) => {
     if (!user) return ""
 
     return jwtService.sign({ accountType: user.type, id: userId },
-        { secret: `${process.env.PRIVATE_KEY}_${user.key}` })
+        { secret: process.env.PRIVATE_KEY, expiresIn: "7d" })
 }
 
 export const slugify = (val: string) => {

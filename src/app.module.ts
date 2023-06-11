@@ -12,12 +12,9 @@ import { validationSchema } from './utils/user';
 
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      validationSchema
-    }),
-    ArticlesModule,
-    UsersModule,
+  imports: [ ConfigModule.forRoot({
+    validationSchema
+  }),
     TypeOrmModule.forRoot({
       type: "postgres",
       host: process.env.DATABASE_HOST,
@@ -29,8 +26,13 @@ import { validationSchema } from './utils/user';
       synchronize: true,
       uuidExtension: "uuid-ossp"
     }),
+    ArticlesModule,
+    UsersModule,
+
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,
+
+  ],
 })
 export class AppModule { }

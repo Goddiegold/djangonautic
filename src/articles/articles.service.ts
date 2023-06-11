@@ -6,6 +6,7 @@ import { slugify, validateRequestBody } from '../utils/user';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { Article } from './entities/article.entity';
 import { Request_Body_Type } from 'src/utils/types';
+import { Request } from 'express';
 
 
 @Injectable()
@@ -16,36 +17,48 @@ export class ArticlesService {
     ) { }
 
     async getArticles() {
-        const articles = await this.articleRepository.find()
+        const articles = await this.articleRepository
+            .createQueryBuilder('article')
+            .leftJoinAndSelect('article.author', 'author')
+            .select([
+                'article.id',
+                'article.title',
+                'article.body',
+                'article.slug',
+                'author.name',
+            ])
+            .getMany();
         return articles
     }
 
-    async getArticle(id: number) {
+    async getArticle(id: string) {
         const article = await this.articleRepository.findOneBy({ id })
         if (article) return article;
         throw new NotFoundException(`Article #${id} was not found`);
     }
 
-    async addArticle(body) {
-        console.log("request-bdoy-->",body)
+    async addArticle(req: any, body) {
+        console.log("request-bdoy-->", body)
+        console.log(req.user)
         const { error } = validateRequestBody(body, Request_Body_Type.CREATE_ARTICLE)
         if (error) throw new BadRequestException(error.details[0].message);
 
         const article = this.articleRepository.create({
             ...body,
-            slug: slugify(body.title)
+            slug: slugify(body.title),
+            author: req.user.id
         })
 
         return this.articleRepository.save(article)
     }
 
-    async deleteArticle(id: number) {
+    async deleteArticle(id: string) {
         const article = await this.articleRepository.findOneBy({ id })
         if (article) return this.articleRepository.remove(article);
         throw new NotFoundException(`Article #${id} was not found`);
     }
 
-    async updateArticle(id: number, body: CreateArticleDto) {
+    async updateArticle(id: string, body: CreateArticleDto) {
         const article = await this.articleRepository.preload({
             id,
             ...body,

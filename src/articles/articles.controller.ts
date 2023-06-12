@@ -28,6 +28,7 @@ export class ArticlesController {
   }
 
   @Put(':id')
+  @UseGuards(ArticleOwnerGuard)
   updateArticle(@Param('id') id: string, @Body() body: CreateArticleDto) {
     return this.articleService.updateArticle(id, body)
   }

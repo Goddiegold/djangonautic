@@ -33,14 +33,13 @@ export class UsersService {
 
         const password = await generateHashedPassword(body.password)
 
-        user = this.userRepository.create({
+        user = await this.userRepository.save(this.userRepository.create({
             ...body,
             password
-        })
+        }))
 
         const token = this.generateAuthTokenHelper(Account_Type.USER, user.id)
 
-        this.userRepository.save(user)
         return {
             id: user.id,
             name: user.name,
@@ -59,15 +58,14 @@ export class UsersService {
 
         const password = await generateHashedPassword(body.password)
 
-        const newUser = this.userRepository.create({
+        const newUser = await this.userRepository.save(this.userRepository.create({
             ...body,
             password,
             isAdmin: true
-        })
+        }))
 
         const token = this.generateAuthTokenHelper(Account_Type.ADMIN, newUser.id)
 
-        this.userRepository.save(newUser)
         return {
             id: newUser.id,
             name: newUser.name,
@@ -81,12 +79,9 @@ export class UsersService {
         const { error } = validateRequestBody(body, Request_Body_Type.USER_LOGIN)
         if (error) throw new BadRequestException(error.details[0].message);
 
-        const user = await this.userRepository
-        .createQueryBuilder('user')
-        .select("user.email",body.email) 
-        .addSelect(["user.password","user.id","user.name","user.email"])
-        .getOne()
-        
+        const user = await this.userRepository.findOne({ where: { email: body.email } })
+        console.log("login-user", user)
+
         if (!user) throw new BadRequestException('User not found!')
 
         const validPassword = await comparePasswords(body.password, user.password)

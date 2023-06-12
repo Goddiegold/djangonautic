@@ -3,6 +3,7 @@ import * as Joi from "@hapi/joi";
 import * as bcrypt from "bcrypt";
 import { JwtService } from '@nestjs/jwt';
 import { Request_Body_Type, Account_Type } from "./types"
+import { InternalServerErrorException } from "@nestjs/common";
 
 
 export const validateRequestBody = (data: any, requestType: Request_Body_Type) => {
@@ -48,6 +49,8 @@ export const comparePasswords = async (rawPassword: string, originalPassword: st
 
 /**generate token for all users */
 export const generateAuthToken = (USER_TYPE: Account_Type, userId: string) => {
+    console.log("generateAuthToken", { USER_TYPE, userId })
+    if (!USER_TYPE || !userId) throw new InternalServerErrorException()
     const jwtService = new JwtService()
     const returnUserDetails = () => {
         switch (USER_TYPE) {

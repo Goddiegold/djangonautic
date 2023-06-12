@@ -25,6 +25,7 @@ export class ArticlesService {
                 'article.title',
                 'article.body',
                 'article.slug',
+                'author.id',
                 'author.name',
             ])
             .getMany();
@@ -32,8 +33,18 @@ export class ArticlesService {
     }
 
     async getArticle(id: string) {
-        const article = await this.articleRepository.findOneBy({ id })
-        if (article) return article;
+        const article = await this.articleRepository.findOne({ where: { id }, relations: ['author'] })
+        console.log(article);
+        if (article) return {
+            id: article.id,
+            title: article.title,
+            slug: article.slug,
+            body: article.body,
+            author: {
+                id: article.author.id,
+                name: article.author.name
+            }
+        };
         throw new NotFoundException(`Article #${id} was not found`);
     }
 

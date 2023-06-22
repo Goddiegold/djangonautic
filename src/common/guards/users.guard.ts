@@ -15,12 +15,34 @@ import { Article } from 'src/articles/entities/article.entity';
 
 const jwtService = new JwtService();
 
+async function decodeUser(request,connection) {
+  const token = request.headers.authorization && request.headers.authorization.startsWith('Bearer') ?
+    request.headers.authorization.split(' ')[1] : null
+
+
+  if (!token) throw new UnauthorizedException();
+
+  console.log('token', token);
+  const decoded = jwtService.verify(token, {
+    secret: process.env.PRIVATE_KEY,
+  });
+
+  console.log('decoded-user', decoded.id);
+
+  if (!decoded) return false;
+
+  const userRepository: Repository<User> =
+    connection.getRepository(User);
+
+  return await userRepository.findOneBy({ id: decoded.id });
+}
+
 @Injectable()
 export class UsersAuthGuard implements CanActivate {
   constructor(
     @InjectConnection()
     private readonly connection: Connection,
-  ) {}
+  ) { }
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
@@ -29,21 +51,8 @@ export class UsersAuthGuard implements CanActivate {
   }
 
   private async isAuthenticated(request: any): Promise<boolean> {
-    const token = request.headers['auth-token'];
-    if (!token) throw new UnauthorizedException();
-    console.log('token', token);
-    const decoded = jwtService.verify(token, {
-      secret: process.env.PRIVATE_KEY,
-    });
-    console.log('decoded-user', decoded);
-    if (!decoded) return false;
-    const userRepository: Repository<User> =
-      this.connection.getRepository(User);
-    const user = await userRepository.findOneBy({ id: decoded.id });
-    console.log('authorized-user-->', user);
-
-    if (!user) throw new NotFoundException('User not found!');
-    request['user'] = user;
+    const user = await decodeUser(request,this.connection)
+    if (!user) return false
     return true;
   }
 }
@@ -53,7 +62,7 @@ export class ArticleOwnerGuard implements CanActivate {
   constructor(
     @InjectConnection()
     private readonly connection: Connection,
-  ) {}
+  ) { }
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
@@ -61,43 +70,26 @@ export class ArticleOwnerGuard implements CanActivate {
     return this.isAuthenticated(request);
   }
 
-  private async isAuthenticated(request: any): Promise<boolean> {
-    const token: any = request.headers['auth-token'];
-    if (!token) throw new UnauthorizedException();
-    console.log('token', token);
-    const decoded = await jwtService.verifyAsync(token, {
-      secret: process.env.PRIVATE_KEY,
-    });
-    console.log('decoded-user', decoded.id);
-    if (!decoded) return false;
-    const userRepository: Repository<User> =
-      this.connection.getRepository(User);
+  private async isAuthenticated(request): Promise<boolean> {
+
+    const user = await decodeUser(request,this.connection)
+    if (!user) return false
+
     const articleRepository: Repository<Article> =
       this.connection.getRepository(Article);
-    const user = await userRepository.findOneBy({ id: decoded.id });
     console.log('authorized-user--->', user);
 
     if (!user) throw new NotFoundException('User not found!');
 
-    const article = await articleRepository.findOne({
-      where: { id: request.params?.id },
-      relations: ['author'],
-    });
+    if (user.isAdmin) return true
+
+    const article = await articleRepository.findOneBy({ id: request.params?.id, author: user });
 
     if (!article) throw new NotFoundException('Article was not found!');
 
-    if (
-      (!article.author && !user.isAdmin) ||
-      (!user.isAdmin &&
-        article.author &&
-        article.author?.id !== article.author.id)
-    )
-      throw new UnauthorizedException();
-
-    if ((article && article?.author?.id === user.id) || user.isAdmin)
-      return true;
     request['user'] = user;
     console.log('current article-->', article);
+    return true;
   }
 }
 
@@ -107,7 +99,7 @@ export class AdminAuthGuard implements CanActivate {
   constructor(
     @InjectConnection()
     private readonly connection: Connection,
-  ) {}
+  ) { }
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
@@ -116,22 +108,7 @@ export class AdminAuthGuard implements CanActivate {
   }
 
   private async isAuthenticated(request: any): Promise<boolean> {
-    const token = request.headers['auth-token'];
-    if (!token) throw new UnauthorizedException();
-    console.log('token', token);
-    const decoded = jwtService.verify(token, {
-      secret: process.env.PRIVATE_KEY,
-    });
-    console.log('decoded-user', decoded);
-    if (!decoded) return false;
-    const userRepository: Repository<User> =
-      this.connection.getRepository(User);
-    const user = await userRepository.findOneBy({
-      id: decoded.id,
-      isAdmin: true,
-    });
-    console.log('authorized-user-->', user);
-
+    const user = await decodeUser(request,this.connection)
     if (!user) throw new NotFoundException('User not found!');
     request['user'] = user;
     return true;

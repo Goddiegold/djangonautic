@@ -11,11 +11,11 @@ import {
   generateAuthToken,
   generateHashedPassword,
   validateRequestBody,
-} from '../utils/user';
+} from '../common/utils/user';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
-import { Account_Type, Request_Body_Type } from 'src/utils/types';
+import { Account_Type, Request_Body_Type } from 'src/common/utils/types';
 import { LoginUserDto } from './dto/login-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Article } from 'src/articles/entities/article.entity';
@@ -97,7 +97,7 @@ export class UsersService {
         },
       },
     });
-    return articles 
+    return articles
   }
 
   async getProfile(req) {

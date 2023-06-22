@@ -6,10 +6,10 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { slugify, validateRequestBody } from '../utils/user';
+import { slugify, validateRequestBody } from '../common/utils/user';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { Article } from './entities/article.entity';
-import { Request_Body_Type } from 'src/utils/types';
+import { Request_Body_Type } from 'src/common/utils/types';
 import { UpdateArticleDto } from './dto/update-article.dto';
 
 @Injectable()

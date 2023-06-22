@@ -8,7 +8,7 @@ import { AppService } from './app.service';
 import { ArticlesModule } from './articles/articles.module';
 import { UsersModule } from './users/users.module';
 
-import { validationSchema } from './utils/user';
+import { validationSchema } from './common/utils/user';
 
 @Module({
   imports: [
@@ -32,4 +32,4 @@ import { validationSchema } from './utils/user';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

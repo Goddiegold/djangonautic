@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 export enum Request_Body_Type {
-    CREATE_ARTICLE = "CREATE_ARTICLE",
-    CREATE_USER = "CREATE_USER",
-    USER_LOGIN = "USER_LOGIN"
+  CREATE_ARTICLE = 'CREATE_ARTICLE',
+  CREATE_USER = 'CREATE_USER',
+  UPDATE_PROFILE = 'UPDATE_PROFILE',
+  USER_LOGIN = 'USER_LOGIN',
 }
 
 export enum Account_Type {
-    USER = "USER",
-    ADMIN = "ADMIN"
+  USER = 'USER',
+  ADMIN = 'ADMIN',
 }

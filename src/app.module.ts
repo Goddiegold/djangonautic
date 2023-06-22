@@ -10,13 +10,13 @@ import { UsersModule } from './users/users.module';
 
 import { validationSchema } from './utils/user';
 
-
 @Module({
-  imports: [ ConfigModule.forRoot({
-    validationSchema
-  }),
+  imports: [
+    ConfigModule.forRoot({
+      validationSchema,
+    }),
     TypeOrmModule.forRoot({
-      type: "postgres",
+      type: 'postgres',
       host: process.env.DATABASE_HOST,
       port: +process.env.DATABASE_PORT,
       username: process.env.DATABASE_USER,
@@ -24,15 +24,12 @@ import { validationSchema } from './utils/user';
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
       synchronize: true,
-      uuidExtension: "uuid-ossp"
+      uuidExtension: 'uuid-ossp',
     }),
     ArticlesModule,
     UsersModule,
-
   ],
   controllers: [AppController],
-  providers: [AppService,
-
-  ],
+  providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

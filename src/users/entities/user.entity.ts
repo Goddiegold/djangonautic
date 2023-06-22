@@ -1,13 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Article } from 'src/articles/entities/article.entity';
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany
-} from 'typeorm';
-
-
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity('user')
 export class User {
@@ -29,6 +22,6 @@ export class User {
   // @OneToMany(() => Book, book => book.author)
   // books: Book[];
 
-  @OneToMany(() => Article, article => article.author)
-  articles: Article[]
+  @OneToMany(() => Article, (article) => article.author)
+  articles: Article[];
 }

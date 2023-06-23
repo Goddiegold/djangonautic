@@ -15,7 +15,7 @@ import { Article } from 'src/articles/entities/article.entity';
 
 const jwtService = new JwtService();
 
-async function decodeUser(request,connection) {
+async function decodeUser(request, connection) {
   const token = request.headers.authorization && request.headers.authorization.startsWith('Bearer') ?
     request.headers.authorization.split(' ')[1] : null
 
@@ -34,7 +34,10 @@ async function decodeUser(request,connection) {
   const userRepository: Repository<User> =
     connection.getRepository(User);
 
-  return await userRepository.findOneBy({ id: decoded.id });
+  return await userRepository.findOne({
+    where: { id: decoded.id },
+    select: ["id", "name", "email", "isAdmin"]
+  });
 }
 
 @Injectable()
@@ -51,8 +54,10 @@ export class UsersAuthGuard implements CanActivate {
   }
 
   private async isAuthenticated(request: any): Promise<boolean> {
-    const user = await decodeUser(request,this.connection)
+    const user = await decodeUser(request, this.connection)
     if (!user) return false
+
+    request['user'] = user;
     return true;
   }
 }
@@ -72,7 +77,7 @@ export class ArticleOwnerGuard implements CanActivate {
 
   private async isAuthenticated(request): Promise<boolean> {
 
-    const user = await decodeUser(request,this.connection)
+    const user = await decodeUser(request, this.connection)
     if (!user) return false
 
     const articleRepository: Repository<Article> =
@@ -81,15 +86,26 @@ export class ArticleOwnerGuard implements CanActivate {
 
     if (!user) throw new NotFoundException('User not found!');
 
-    if (user.isAdmin) return true
 
-    const article = await articleRepository.findOneBy({ id: request.params?.id, author: user });
-
+    const article = await articleRepository.findOne({
+      where: { id: request.params?.id }, relations: ["author"], select: {
+        author: {
+          email: true,
+          isAdmin: true,
+          password: false
+        }
+      }
+    });
+    console.log('current article-->', article);
     if (!article) throw new NotFoundException('Article was not found!');
 
-    request['user'] = user;
-    console.log('current article-->', article);
-    return true;
+    if (article && article.author.email !== user.email && !user.isAdmin) throw new UnauthorizedException()
+
+    if (article && article.author.email === user.email || article && user.isAdmin) {
+      request["currentArticle"] = article
+      request["user"] = user
+      return true
+    }
   }
 }
 
@@ -108,7 +124,7 @@ export class AdminAuthGuard implements CanActivate {
   }
 
   private async isAuthenticated(request: any): Promise<boolean> {
-    const user = await decodeUser(request,this.connection)
+    const user = await decodeUser(request, this.connection)
     if (!user) throw new NotFoundException('User not found!');
     request['user'] = user;
     return true;

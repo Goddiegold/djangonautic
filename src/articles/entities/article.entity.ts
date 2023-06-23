@@ -14,7 +14,13 @@ export class Article {
   body: string;
 
   @Column()
-  slug: string;
+  slug: string; 
+
+  @Column({nullable:true})
+  image:string;
+
+  @Column({nullable:true})
+  image_id:string
 
   // @ManyToOne(() => Author, author => author.books)
   @ManyToOne(() => User, (author) => author.articles)

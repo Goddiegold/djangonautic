@@ -11,6 +11,7 @@ import { CreateArticleDto } from './dto/create-article.dto';
 import { Article } from './entities/article.entity';
 import { Request_Body_Type } from 'src/common/utils/types';
 import { UpdateArticleDto } from './dto/update-article.dto';
+import { deleteUploadedFile } from './services/upload.service';
 
 @Injectable()
 export class ArticlesService {
@@ -50,6 +51,7 @@ export class ArticlesService {
 
   async addArticle(req: any, body) {
     console.log('request-bdoy-->', body);
+    console.log('request-file-->', req.file);
     console.log(req.user);
     const { error } = validateRequestBody(
       body,
@@ -61,19 +63,25 @@ export class ArticlesService {
       ...body,
       slug: slugify(body.title),
       author: req.user.id,
+      image: req?.file?.path && req.file.path,
+      image_id: req?.file?.filename && req.file.filename
     });
 
     return this.articleRepository.save(article);
   }
 
-  async updateArticle(id: string, body: UpdateArticleDto) {
+  async updateArticle(req, id: string, body: UpdateArticleDto) {
+
+    deleteUploadedFile(req?.file?.path && req.currentArticle.image_id, "image")
+
     const article = await this.articleRepository.preload({
       id,
       ...body,
       slug: body.title && slugify(body.title),
+      image: req?.file?.path && req.file.path,
+      image_id: req?.file?.filename && req.file.filename
     });
-    if (article) return this.articleRepository.save(article);
-    throw new NotFoundException(`Article #${id} was not found`);
+    return this.articleRepository.save(article)
   }
 
   async deleteArticle(id: string) {

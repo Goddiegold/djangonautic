@@ -7,17 +7,16 @@ import {
   Param,
   Patch,
   Post,
-  Put,
   Req,
 } from '@nestjs/common';
 import { ArticlesService } from './articles.service';
 import { CreateArticleDto } from './dto/create-article.dto';
-import { ParseIntPipe } from '@nestjs/common';
 import { Request } from 'express';
-import { UseGuards } from '@nestjs/common/decorators';
+import { UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ArticleOwnerGuard, UsersAuthGuard } from 'src/common/guards/users.guard';
 import { UpdateArticleDto } from './dto/update-article.dto';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Articles')
 @Controller('api/articles')
@@ -31,8 +30,14 @@ export class ArticlesController {
 
   @Post()
   @ApiBearerAuth()
+  @UseInterceptors(FileInterceptor('image'))
   @UseGuards(UsersAuthGuard)
-  addArticle(@Req() req: Request, @Body() body: CreateArticleDto) {
+  addArticle(@Req() req: Request,
+    @Body() body: CreateArticleDto,
+    @UploadedFile() uploadedImgfile
+  ) {
+    console.log("Article--uploadedFile->", uploadedImgfile)
+    req["file"] = uploadedImgfile
     return this.articleService.addArticle(req, body);
   }
 
@@ -41,11 +46,17 @@ export class ArticlesController {
     return this.articleService.getArticle(id);
   }
 
-  @Put(':id')
+  @Patch(':id')
   @ApiBearerAuth()
   @UseGuards(ArticleOwnerGuard)
-  updateArticle(@Param('id') id: string, @Body() body: UpdateArticleDto) {
-    return this.articleService.updateArticle(id, body);
+  @UseInterceptors(FileInterceptor('image'))
+  updateArticle(@Req() req: Request,
+    @Param('id') id: string,
+    @Body() body: UpdateArticleDto,
+    @UploadedFile() uploadedImgfile
+  ) {
+    req["file"] = uploadedImgfile
+    return this.articleService.updateArticle(req, id, body);
   }
 
   @Delete(':id')

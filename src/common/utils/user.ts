@@ -35,13 +35,17 @@ export const validateRequestBody = (
   return schemas[requestType].validate(data);
 };
 
+const string_required = Joi.string().required()
 export const validationSchema = Joi.object({
-  DATABASE_NAME: Joi.string().required(),
-  DATABASE_USER: Joi.string().required(),
-  DATABASE_PASSWORD: Joi.string().required(),
-  PRIVATE_KEY: Joi.string().required(),
-  ADMIN_KEY: Joi.string().required(),
-  USER_KEY: Joi.string().required(),
+  DATABASE_NAME: string_required,
+  DATABASE_USER: string_required,
+  DATABASE_PASSWORD: string_required,
+  PRIVATE_KEY: string_required,
+  ADMIN_KEY: string_required,
+  USER_KEY: string_required,
+  CLOUDINARY_CLOUD_NAME: string_required,
+  CLOUDINARY_API_KEY: string_required,
+  CLOUDINARY_API_SECRET_KEY: string_required,
 });
 
 export const generateHashedPassword = async (rawPassword: string) =>

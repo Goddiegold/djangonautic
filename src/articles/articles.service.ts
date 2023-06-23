@@ -85,7 +85,7 @@ export class ArticlesService {
   }
 
   async deleteArticle(req, id: string) {
-    deleteUploadedFile(req?.file?.path && req.currentArticle.image_id, "image")
+    deleteUploadedFile(req?.currentArticle?.image_id && req.currentArticle.image_id, "image")
     const article = await this.articleRepository.findOneBy({ id });
     return this.articleRepository.remove(article);
   }

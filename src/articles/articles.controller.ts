@@ -15,7 +15,7 @@ import { Request } from 'express';
 import { UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ArticleOwnerGuard, UsersAuthGuard } from 'src/common/guards/users.guard';
 import { UpdateArticleDto } from './dto/update-article.dto';
-import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Articles')
@@ -30,6 +30,7 @@ export class ArticlesController {
 
   @Post()
   @ApiBearerAuth()
+  @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('image'))
   @UseGuards(UsersAuthGuard)
   addArticle(@Req() req: Request,
@@ -49,6 +50,7 @@ export class ArticlesController {
   @Patch(':id')
   @ApiBearerAuth()
   @UseGuards(ArticleOwnerGuard)
+  @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('image'))
   updateArticle(@Req() req: Request,
     @Param('id') id: string,
@@ -62,14 +64,11 @@ export class ArticlesController {
   @Delete(':id')
   @ApiBearerAuth()
   @UseGuards(ArticleOwnerGuard)
-  @UseInterceptors(FileInterceptor('image'))
   deleteArticle(
     @Req() req: Request,
     @Param('id') id: string,
-    @UploadedFile() uploadedImgfile
   ) {
-    req["file"] = uploadedImgfile
-    return this.articleService.deleteArticle(req,id);
+    return this.articleService.deleteArticle(req, id);
   }
 
 

@@ -34,7 +34,7 @@ export const deleteUploadedFile = (publicId: string, resource_type: string) => {
             console.error(`error on deleteUploadedFile-${publicId}`, error);
             throw new InternalServerErrorException("An error occured, this process couldn't be completed!")
         } else {
-            console.error(`scucess on deleteUploadedFile-${publicId}`, result);
+            console.error(`success on deleteUploadedFile-${publicId}`, result);
         }
     })
 }

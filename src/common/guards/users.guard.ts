@@ -99,13 +99,15 @@ export class ArticleOwnerGuard implements CanActivate {
     console.log('current article-->', article);
     if (!article) throw new NotFoundException('Article was not found!');
 
-    if (article && article.author.email !== user.email && !user.isAdmin) throw new UnauthorizedException()
-
     if (article && article.author.email === user.email || article && user.isAdmin) {
       request["currentArticle"] = article
       request["user"] = user
       return true
     }
+
+    if (article && article.author.email !== user.email && !user.isAdmin) throw new UnauthorizedException()
+
+
   }
 }
 

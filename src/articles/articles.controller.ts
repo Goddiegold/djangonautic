@@ -62,8 +62,14 @@ export class ArticlesController {
   @Delete(':id')
   @ApiBearerAuth()
   @UseGuards(ArticleOwnerGuard)
-  deleteArticle(@Param('id') id: string) {
-    return this.articleService.deleteArticle(id);
+  @UseInterceptors(FileInterceptor('image'))
+  deleteArticle(
+    @Req() req: Request,
+    @Param('id') id: string,
+    @UploadedFile() uploadedImgfile
+  ) {
+    req["file"] = uploadedImgfile
+    return this.articleService.deleteArticle(req,id);
   }
 
 

@@ -84,10 +84,10 @@ export class ArticlesService {
     return this.articleRepository.save(article)
   }
 
-  async deleteArticle(id: string) {
+  async deleteArticle(req, id: string) {
+    deleteUploadedFile(req?.file?.path && req.currentArticle.image_id, "image")
     const article = await this.articleRepository.findOneBy({ id });
-    if (article) return this.articleRepository.remove(article);
-    throw new NotFoundException(`Article #${id} was not found`);
+    return this.articleRepository.remove(article);
   }
 
 }
